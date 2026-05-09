@@ -2558,6 +2558,50 @@ html, body {
   .practice-body { padding: 16px; }
   .typing-stats { flex-wrap: wrap; }
   .t-stat { min-width: calc(50% - 5px); }
+
+  /* ── 홈 nav 버튼: 하단 좌우 코너로 이동 ── */
+  #hp-hanbun {
+    left: 20px !important;
+    top: auto !important;
+    bottom: 36px;
+    font-size: 18px;
+  }
+  #hp-meotjieun {
+    left: auto !important;
+    right: 20px;
+    top: auto !important;
+    bottom: 36px;
+    font-size: 18px;
+  }
+
+  /* ── 세부 페이지 ── */
+  .dp-back { top: 16px; }
+
+  .dp-scroll {
+    padding: 56px 5vw 80px 5vw;
+  }
+
+  .dp-title {
+    font-size: clamp(32px, 9vw, 60px);
+  }
+
+  .dp-portrait-wrap {
+    top: 48px;
+    right: 4vw;
+  }
+  .dp-portrait-img {
+    width: 56px;
+  }
+
+  .dp-intro {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .dp-birth-text {
+    font-size: 12px;
+    line-height: 1.7;
+  }
 }
 
 
