@@ -231,6 +231,9 @@
       <span class="tj-placeholder" id="tj-placeholder">타이핑을 시작하세요 — 맥북 키보드로 세벌식을 입력합니다</span>
       <div class="tj-text" id="tj-text"></div>
     </div>
+    <input type="text" id="tj-mobile-input" class="tj-mobile-input"
+      autocomplete="off" autocorrect="off" autocapitalize="none"
+      spellcheck="false" inputmode="text" />
 
     <div class="tj-keyboard">
       <div class="tj-legend">
@@ -1823,6 +1826,36 @@
     }
 
     tjBack.addEventListener('click', closeTajagi);
+
+    /* ── 모바일 입력 ── */
+    var tjMobileInput = document.getElementById('tj-mobile-input');
+    var isMobile = ('ontouchstart' in window);
+
+    if (isMobile && tjMobileInput) {
+      document.getElementById('tj-output').addEventListener('click', function () {
+        tjMobileInput.value = tj.committed;
+        tjMobileInput.focus();
+      });
+
+      tjMobileInput.addEventListener('input', function () {
+        tj.committed = tjMobileInput.value;
+        tj.cho = tj.jung = tj.jong = -1;
+        tj.mode = 'idle';
+        updateDisplay();
+        if (tjMobileInput.value.length > 200) {
+          tjMobileInput.value = tj.committed;
+        }
+      });
+
+      tjMobileInput.addEventListener('focus', function () {
+        document.getElementById('tj-placeholder').style.display = 'none';
+      });
+
+      if (isMobile) {
+        document.getElementById('tj-placeholder').textContent =
+          '탭하여 입력 — 한글 키보드로 자유롭게 쓰세요';
+      }
+    }
 
   })();
   </script>

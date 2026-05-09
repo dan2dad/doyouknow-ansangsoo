@@ -2663,25 +2663,29 @@ html, body {
     width: 88vw;
   }
 
-  /* ── detail-tajagi: 물리 키보드 필요 → 안내 메시지 ── */
-  #detail-tajagi .tj-keyboard,
-  #detail-tajagi .tj-output {
-    display: none;
+  /* ── detail-tajagi: 키보드 축소 ── */
+  .tj-keyboard {
+    zoom: 0.52;
   }
-  #detail-tajagi::after {
-    content: '세벌식 타자기는\A맥북 키보드가 필요합니다';
-    white-space: pre;
+  .tj-output {
+    padding: 28px 5vw 20px;
+    cursor: pointer;
+  }
+  .tj-placeholder {
+    font-size: 14px;
+    top: 28px;
+    left: 5vw;
+  }
+  .tj-text {
+    font-size: clamp(32px, 6vw, 96px);
+  }
+  .tj-mobile-input {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: var(--font-ahn);
-    font-size: 18px;
-    line-height: 2;
-    text-align: center;
-    color: #aaa;
-    letter-spacing: 3px;
-    pointer-events: none;
+    left: -9999px;
+    top: -9999px;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
   }
 }
 
