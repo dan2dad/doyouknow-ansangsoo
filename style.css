@@ -2662,6 +2662,18 @@ html, body {
   .ap-text-panel {
     width: 88vw;
   }
+  .ap-gogo {
+    right: auto;
+    top: auto;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 15px;
+    padding: 14px 28px;
+    letter-spacing: 3px;
+    animation: none;
+  }
+  .ap-gogo:active { transform: translateX(-50%) translateX(2px); }
 
   /* ── detail-tajagi: 키보드 축소 ── */
   .tj-keyboard {
