@@ -2577,33 +2577,111 @@ html, body {
     font-size: 18px;
   }
 
-  /* ── 세부 페이지 ── */
-  .dp-back { top: 16px; }
+  /* ── 세부 페이지 공통 ── */
+  .dp-back {
+    top: 20px;
+    padding: 10px 0;
+  }
 
   .dp-scroll {
-    padding: 56px 5vw 80px 5vw;
+    padding: 60px 5vw 100px 5vw;
   }
 
-  .dp-title {
-    font-size: clamp(32px, 9vw, 60px);
+  /* dp-title: 크기 줄이고 애니메이션 제거 (iOS 탭 버그 방지) */
+  .dp-title,
+  .detail-page.dp-in .dp-title {
+    font-size: clamp(32px, 9vw, 60px) !important;
+    animation: none !important;
   }
 
+  /* 초상 이미지: 텍스트 위 겹침 → 숨김 */
   .dp-portrait-wrap {
-    top: 48px;
-    right: 4vw;
-  }
-  .dp-portrait-img {
-    width: 56px;
+    display: none;
   }
 
   .dp-intro {
-    font-size: 13px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* 하단 고정 카드 → 바텀 스트립으로 전환 */
+  .dp-card--pinned {
+    left: 0 !important;
+    right: 0;
+    bottom: 0;
+    padding: 12px 16px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(255,255,255,0.96);
+    border-top: 1px solid #e8e8e8;
+    max-height: 36vh;
+    overflow-y: auto;
+  }
+  .dp-card--pinned .dp-img-s1 {
+    width: 72px !important;
+    flex-shrink: 0;
+  }
+  .dp-card--pinned .dp-card-body {
+    width: auto !important;
+    flex: 1;
+    min-width: 0;
+  }
+  .dp-birth-text {
+    font-size: 11px;
     line-height: 1.65;
   }
 
-  .dp-birth-text {
-    font-size: 12px;
-    line-height: 1.7;
+  /* ── detail-main (멋지은 이들) ── */
+  .dm-header { height: 60px; }
+  .dm-home-btn { font-size: 20px; }
+  .dm-scroll { padding-top: 60px; }
+  .dm-hero {
+    padding: 0 20px;
+    margin-top: 6vw;
+  }
+  .dm-hero-img {
+    width: 80vw;
+    height: auto;
+  }
+  .dm-label { font-size: clamp(20px, 3.125vw, 60px); }
+  .dm-title {
+    font-size: clamp(24px, 3.65vw, 70px);
+    margin-top: 8vw;
+  }
+  .dm-ref-row {
+    margin-left: 5vw;
+    flex-wrap: wrap;
+  }
+
+  /* ── detail-anche (안체프로젝트) ── */
+  .ap-grid {
+    grid-template-columns: 36vw 3vw 36vw 3vw;
+    grid-template-rows: 20vh 20vh;
+  }
+  .ap-text-panel {
+    width: 88vw;
+  }
+
+  /* ── detail-tajagi: 물리 키보드 필요 → 안내 메시지 ── */
+  #detail-tajagi .tj-keyboard,
+  #detail-tajagi .tj-output {
+    display: none;
+  }
+  #detail-tajagi::after {
+    content: '세벌식 타자기는\A맥북 키보드가 필요합니다';
+    white-space: pre;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-ahn);
+    font-size: 18px;
+    line-height: 2;
+    text-align: center;
+    color: #aaa;
+    letter-spacing: 3px;
+    pointer-events: none;
   }
 }
 
@@ -2628,14 +2706,16 @@ html, body {
   50%       { transform: translateY(-20px); }
 }
 
-.ap-grid-wrap {
+.ap-grid-anim {
   flex-shrink: 0;
-  cursor: pointer;
   animation: ap-float 4s ease-in-out infinite;
-  user-select: none;
 }
-.ap-stage--open .ap-grid-wrap {
+.ap-stage--open .ap-grid-anim {
   animation-play-state: paused;
+}
+.ap-grid-wrap {
+  cursor: pointer;
+  user-select: none;
 }
 
 /* 텍스트 패널 래퍼: 이미지 우측에서만 클립 */
