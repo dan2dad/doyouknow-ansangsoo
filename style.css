@@ -2044,16 +2044,19 @@ html, body {
 }
 
 /* ── 안체프로젝트 버튼: 1118,475 / 352×306 ── */
-.hp-project-obj {
+.hp-project-wrap {
   position: absolute;
   left: 58.2%;     /* 1118/1920 */
   top: 44%;        /* 475/1080 */
+  animation: hp-drift-2 10s ease-in-out infinite;
+}
+.hp-project-obj {
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
-  animation: hp-drift-2 10s ease-in-out infinite;
   user-select: none;
+  display: block;
 }
 .hp-proj-img {
   display: block;
