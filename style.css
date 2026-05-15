@@ -2377,7 +2377,7 @@ html, body {
 /* ── AG 기본 형태 섹션 ── */
 .ag-form-section {
   position: relative;
-  padding: 80px 0 60px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2427,7 +2427,7 @@ html, body {
 
 .ag-form-title {
   font-family: var(--font-ahn);
-  font-size: clamp(48px, 7vw, 96px);
+  font-size: clamp(36px, 3.65vw, 70px);
   font-weight: 700;
   color: #000;
   line-height: 1.1;
@@ -3384,9 +3384,24 @@ html, body {
   bottom: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding-top: 102px;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 102px;
   -webkit-overflow-scrolling: touch;
 }
+
+/* full-page 섹션 */
+.dm-section {
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+.dm-section--hero { overflow: hidden; }
+.dm-section--intro { overflow: visible; }
+.dm-section--form { align-items: center; }
 
 /* 히어로 이미지 행 */
 .dm-hero {
@@ -3394,7 +3409,7 @@ html, body {
   align-items: flex-start;
   gap: 20px;
   width: 100%;
-  margin-top: 8.5vw;
+  margin-top: 0;
   overflow-x: auto;
   overflow-y: hidden;
   cursor: pointer;
@@ -3436,7 +3451,7 @@ html, body {
   font-family: AGahnsangsoo2012, sans-serif;
   font-weight: 700;
   line-height: 1.1;
-  margin: 26vw 0 0 0;
+  margin: 0.5vw 0 0 0;
   padding: 0;
   text-align: center;
 }
@@ -3570,7 +3585,7 @@ html, body {
   font-size: clamp(40px, 5vw, 96px);
   font-family: AGahnsangsoo2012, sans-serif;
   font-weight: 500;
-  margin: 26vw 0 13vw 34.5vw;
+  margin: 0 0 0 34.5vw;
   line-height: 1.1;
 }
 
