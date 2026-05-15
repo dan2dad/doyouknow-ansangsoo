@@ -2374,6 +2374,81 @@ html, body {
   gap: 48px;
 }
 
+/* ── AG 기본 형태 섹션 ── */
+.ag-form-section {
+  position: relative;
+  padding: 80px 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ag-form-circles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ag-form-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: #98FB98;
+  mix-blend-mode: multiply;
+  transform: translate(-50%, -50%);
+}
+.ag-form-circle--1 {
+  width: 36px;
+  height: 36px;
+  animation: ag-circle-glow 3s ease-in-out infinite 0s;
+}
+.ag-form-circle--2 {
+  width: 90px;
+  height: 90px;
+  animation: ag-circle-glow 3s ease-in-out infinite 1s;
+}
+.ag-form-circle--3 {
+  width: 192px;
+  height: 192px;
+  background: rgba(152, 251, 152, 0.60);
+  animation: ag-circle-glow 3s ease-in-out infinite 2s;
+}
+
+@keyframes ag-circle-glow {
+  0%   { opacity: 0.1; }
+  15%  { opacity: 0.9; }
+  33%  { opacity: 0.1; }
+  100% { opacity: 0.1; }
+}
+
+.ag-form-title {
+  font-family: var(--font-ahn);
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 700;
+  color: #000;
+  line-height: 1.1;
+  position: relative;
+  z-index: 1;
+  margin: 0 0 32px;
+}
+
+.ag-form-desc {
+  font-family: var(--font-onul);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: #000;
+  max-width: 560px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
 /* 왼쪽 하단 고정 카드 */
 .dp-card--pinned {
   position: fixed;
