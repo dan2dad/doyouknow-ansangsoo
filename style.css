@@ -3536,6 +3536,7 @@ html, body {
   -webkit-user-drag: none;
   pointer-events: none;
   scroll-snap-align: center;
+  outline: 2px solid black;
 }
 
 /* 라이트 라벨 */
