@@ -3749,10 +3749,21 @@ html, body {
 
 .dm-section--hunmin2 {
   height: auto;
-  min-height: 60vh;
+  min-height: 100vh;
   align-items: center;
-  padding: 8vh 0;
+  padding: 12vh 0;
   gap: clamp(32px, 4vh, 56px);
+}
+
+.hm-img-caption {
+  text-align: right;
+  color: #8B8B8B;
+  font-size: clamp(11px, 0.85vw, 15px);
+  font-family: OnulHanChe, sans-serif;
+  font-weight: 700;
+  line-height: 1.6;
+  margin: 6px 0 0 0;
+  width: 100%;
 }
 
 /* 마지막 문장 */
