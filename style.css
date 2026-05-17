@@ -2499,6 +2499,20 @@ html, body {
   pointer-events: none;
 }
 
+/* 오버레이 열렸을 때 원 전체 켜짐 고정 */
+.ag-circles-lit .ag-form-circle {
+  animation: none;
+  opacity: 0.9;
+}
+
+.ag-caption-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 3px;
+  margin-bottom: 16px;
+}
+
 .ag-caption-panel {
   position: absolute;
   width: 300px;
