@@ -2384,6 +2384,14 @@ html, body {
   text-align: center;
 }
 
+.ag-form-u {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .ag-form-circles {
   position: absolute;
   top: 50%;
@@ -2391,7 +2399,7 @@ html, body {
   width: 0;
   height: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
 .ag-form-circle {
