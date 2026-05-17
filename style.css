@@ -3766,7 +3766,7 @@ html, body {
 }
 
 .hm-chart-img {
-  width: clamp(140px, 22vw, 430px);
+  width: clamp(120px, 18vw, 360px);
   height: auto;
   display: block;
 }
