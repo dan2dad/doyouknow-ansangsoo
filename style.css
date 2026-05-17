@@ -2388,6 +2388,7 @@ html, body {
 .ag-form-u {
   text-decoration: underline;
   text-underline-offset: 4px;
+  cursor: pointer;
 }
 
 .ag-form-circles {

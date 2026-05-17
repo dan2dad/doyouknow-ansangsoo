@@ -408,9 +408,8 @@
             <div class="ag-form-circle ag-form-circle--2"></div>
             <div class="ag-form-circle ag-form-circle--1"></div>
           </div>
-          <button class="ag-form-trigger" id="ag-form-circles-trigger" aria-label="기본 형태 자세히 보기"></button>
           <h2 class="ag-form-title">안상수체의 기본 형태</h2>
-          <p class="ag-form-desc">안상수는 한글 활자 형태를 크게 두 가지로 구분하고, <span class="ag-form-u">네모틀과 탈네모틀</span> 글자꼴은 각각의 목적과 특성을 살리면서 발전할 것이라고 했다. 특히, 탈네모틀 글자꼴의 가능성 대해서 높게 평가했다.</p>
+          <p class="ag-form-desc">안상수는 한글 활자 형태를 크게 두 가지로 구분하고, <span class="ag-form-u" id="ag-talnemo-word">네모틀과 탈네모틀</span> 글자꼴은 각각의 목적과 특성을 살리면서 발전할 것이라고 했다. 특히, 탈네모틀 글자꼴의 가능성 대해서 높게 평가했다.</p>
         </div>
       </div>
 
@@ -909,6 +908,7 @@
           detailMain.style.transition    = 'opacity 0.3s ease';
           detailMain.style.opacity       = '1';
           detailMain.style.pointerEvents = 'auto';
+          if (window.positionAgCircles) window.positionAgCircles();
 
           if (sectionId) {
             var target = document.getElementById(sectionId);
@@ -980,16 +980,27 @@
     })();
 
     /* ================================================================
-       기본 형태 원 클릭 → 캡션 오버레이
+       기본 형태 원 + 텍스트 클릭 → 캡션 오버레이
     ================================================================ */
     (function () {
       var agOverlay  = document.getElementById('ag-form-overlay');
       var agSvg      = document.getElementById('ag-overlay-svg');
       var agLeft     = document.getElementById('ag-caption-left');
       var agRight    = document.getElementById('ag-caption-right');
-      var agTrigger  = document.getElementById('ag-form-circles-trigger');
+      var agWord     = document.getElementById('ag-talnemo-word');
       var agCircles  = document.querySelector('.ag-form-circles');
+      var agSection  = document.querySelector('.ag-form-section');
       var savedCx = 0, savedCy = 0;
+
+      function positionCircles() {
+        if (!agSection || !agWord) return;
+        var sr = agSection.getBoundingClientRect();
+        var wr = agWord.getBoundingClientRect();
+        agCircles.style.left = (wr.left - sr.left + wr.width  / 2) + 'px';
+        agCircles.style.top  = (wr.top  - sr.top  + wr.height / 2) + 'px';
+      }
+      window.positionAgCircles = positionCircles;
+      window.addEventListener('resize', positionCircles);
 
       function drawLines() {
         var lr = agLeft.getBoundingClientRect();
@@ -1005,11 +1016,11 @@
           '<line x1="' + savedCx + '" y1="' + savedCy + '" x2="' + rx + '" y2="' + ry + '" stroke="#98FB98" stroke-width="7" stroke-linecap="round"/>';
       }
 
-      agTrigger.addEventListener('click', function (e) {
+      agWord.addEventListener('click', function (e) {
         e.stopPropagation();
-        var tr = agTrigger.getBoundingClientRect();
-        savedCx = tr.left + tr.width  / 2;
-        savedCy = tr.top  + tr.height / 2;
+        var wr = agWord.getBoundingClientRect();
+        savedCx = wr.left + wr.width  / 2;
+        savedCy = wr.top  + wr.height / 2;
 
         agCircles.classList.add('ag-circles-lit');
         agCircles.style.position = 'fixed';
@@ -1026,10 +1037,9 @@
           agOverlay.classList.remove('is-open');
           agCircles.classList.remove('ag-circles-lit');
           agCircles.style.position = '';
-          agCircles.style.left     = '';
-          agCircles.style.top      = '';
           agCircles.style.zIndex   = '';
           agSvg.innerHTML = '';
+          positionCircles();
         }
       });
     })();
