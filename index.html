@@ -386,7 +386,20 @@
         </div>
       </div>
 
-      <!-- 섹션 4: 마지막 문장 -->
+      <!-- 섹션 4: 훈민정음의 창제 원리를 따르다 -->
+      <div class="dm-section dm-section--hunmin">
+        <h2 class="dm-title hm-title">훈민정음의 창제 원리를 따르다</h2>
+
+        <p class="dm-body">안상수체의 파격적이라고 할 만큼의 간결함은 훈민정음 창제 원리에 근거한다. 훈민정음은 닿자와 홀자 24개만 설계해 형태를 변형하지 않고 모든 경우에 사용하는 가장 간결하고 기하학적인 형태이다. 수직선, 수평선, 사선, 정원으로 구성된 24자의 낱자를 기본 형태로 삼아 쌍닿자, 이중홀자 등을 조합했다.</p>
+
+        <div class="hm-img-area" id="hm-img-area">
+          <!-- 이미지 추후 추가 -->
+        </div>
+
+        <p class="dm-body">안상수체는 첫 닿자와 받침의 형태를 같이 쓰고, 홀자의 위치를 가운데로 맞추어 아주 단순한 구조로 글자체를 설계했고, <span class="dm-u" data-fn="hm1">첫닿자 19자</span>, <span class="dm-u" data-fn="hm2">홀자 21자</span>, <span class="dm-u" data-fn="hm3">받침 27자</span>를 조합하는 방식으로 손쉽게 11,172자를 만들어냈다. <span class="dm-highlight">이는 네모틀 글자체에서 글자마다 형태, 크기, 위치를 변형하여 11,172자를 각각 설계해야 했던 관습에서 벗어난 새롭고도 익숙한 접근이었다.</span></p>
+      </div>
+
+      <!-- 섹션 5: 마지막 문장 -->
       <div class="dm-section dm-section--closing">
         <div class="dm-closing">영원한 이별은 아니다.</div>
       </div>
@@ -1981,7 +1994,10 @@
       '3': {
         title: "(3) \"이런 것도 글자냐\"",
         text:  "당시 한글 글꼴은 네모틀에 맞춰 설계하는 것이 당연한 관습이었다. 탈네모꼴인 안상수체는 그 관습을 정면으로 거스른 시도였고, 이 핀잔은 역설적으로 안상수체가 기존 타이포그라피의 문법을 얼마나 과감하게 벗어났는지를 보여준다."
-      }
+      },
+      'hm1': { imgOnly: true },
+      'hm2': { imgOnly: true },
+      'hm3': { imgOnly: true }
     };
 
     function buildCard(data) {
@@ -1999,10 +2015,13 @@
       }
     }
 
+    var hmSpans = document.querySelectorAll('.dm-u[data-fn^="hm"]');
+
     function closeFn() {
       overlay.classList.remove('is-open');
       card.classList.remove('is-open');
       if (activeSpan) { activeSpan.classList.remove('fn-active'); activeSpan = null; }
+      hmSpans.forEach(function(s) { s.classList.remove('fn-active'); });
     }
 
     document.querySelectorAll('.dm-u[data-fn]').forEach(function (span) {
@@ -2012,10 +2031,21 @@
         var data = FN_DATA[fn];
         if (!data) return;
 
+        if (data.imgOnly) {
+          var alreadyOpen = hmSpans[0] && hmSpans[0].classList.contains('fn-active');
+          if (alreadyOpen) { closeFn(); return; }
+          if (activeSpan) activeSpan.classList.remove('fn-active');
+          activeSpan = span;
+          hmSpans.forEach(function(s) { s.classList.add('fn-active'); });
+          overlay.classList.add('is-open');
+          return;
+        }
+
         if (activeSpan === span) { closeFn(); return; }
         if (activeSpan) activeSpan.classList.remove('fn-active');
         activeSpan = span;
         span.classList.add('fn-active');
+
 
         buildCard(data);
 
