@@ -3771,9 +3771,9 @@ html, body {
   display: block;
 }
 
-.hm-chart--chot { left: 0;   top: 26%; }
-.hm-chart--bat  { right: 0;  top: 0;   }
-.hm-chart--hol  { left: 34%; top: 57%; }
+.hm-chart--chot { left: 18%;  top: 16%; }
+.hm-chart--bat  { right: 18%; top: 0;   }
+.hm-chart--hol  { left: 34%;  top: 56%; }
 
 .hm-img-caption {
   text-align: right;
