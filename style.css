@@ -2404,24 +2404,41 @@ html, body {
 .ag-form-circle--1 {
   width: 36px;
   height: 36px;
-  animation: ag-circle-glow 3s ease-in-out infinite 0s;
+  animation: ag-c1-glow 4s ease-in-out infinite;
 }
 .ag-form-circle--2 {
   width: 90px;
   height: 90px;
-  animation: ag-circle-glow 3s ease-in-out infinite 1s;
+  animation: ag-c2-glow 4s ease-in-out infinite;
 }
 .ag-form-circle--3 {
   width: 192px;
   height: 192px;
   background: rgba(152, 251, 152, 0.60);
-  animation: ag-circle-glow 3s ease-in-out infinite 2s;
+  animation: ag-c3-glow 4s ease-in-out infinite;
 }
 
-@keyframes ag-circle-glow {
+@keyframes ag-c1-glow {
   0%   { opacity: 0.1; }
   15%  { opacity: 0.9; }
-  33%  { opacity: 0.1; }
+  65%  { opacity: 0.9; }
+  80%  { opacity: 0.1; }
+  100% { opacity: 0.1; }
+}
+@keyframes ag-c2-glow {
+  0%   { opacity: 0.1; }
+  15%  { opacity: 0.1; }
+  30%  { opacity: 0.9; }
+  65%  { opacity: 0.9; }
+  80%  { opacity: 0.1; }
+  100% { opacity: 0.1; }
+}
+@keyframes ag-c3-glow {
+  0%   { opacity: 0.1; }
+  30%  { opacity: 0.1; }
+  45%  { opacity: 0.9; }
+  65%  { opacity: 0.9; }
+  80%  { opacity: 0.1; }
   100% { opacity: 0.1; }
 }
 
