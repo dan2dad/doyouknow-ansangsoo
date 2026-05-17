@@ -402,21 +402,21 @@
       <!-- 섹션 5: 안체프로젝트 A-Project -->
       <div class="dm-section dm-section--aproject">
         <h2 class="dm-title">&lt;안체 프로젝트 A-Project&gt;</h2>
-        <div class="ap-grid">
-          <figure class="ap-thumb" data-fn="ap1">
-            <img src="image/네빌 브로디.png" alt="네빌 브로디" class="ap-img" />
+        <div class="dm-ap-grid">
+          <figure class="dm-ap-thumb" data-fn="ap1">
+            <img src="image/네빌 브로디.png" alt="네빌 브로디" class="dm-ap-img" />
             <figcaption class="dm-ref-caption">네빌 브로디</figcaption>
           </figure>
-          <figure class="ap-thumb" data-fn="ap2">
-            <img src="image/사랑 쿨카르니.png" alt="사랑 쿨카르니" class="ap-img" />
+          <figure class="dm-ap-thumb" data-fn="ap2">
+            <img src="image/사랑 쿨카르니.png" alt="사랑 쿨카르니" class="dm-ap-img" />
             <figcaption class="dm-ref-caption">사랑 쿨카르니</figcaption>
           </figure>
-          <figure class="ap-thumb" data-fn="ap3">
-            <img src="image/엠엠파리.png" alt="엠엠 파리" class="ap-img" />
+          <figure class="dm-ap-thumb" data-fn="ap3">
+            <img src="image/엠엠파리.png" alt="엠엠 파리" class="dm-ap-img" />
             <figcaption class="dm-ref-caption">엠엠 파리</figcaption>
           </figure>
-          <figure class="ap-thumb" data-fn="ap4">
-            <img src="image/하라 겐야.png" alt="하라 겐야" class="ap-img" />
+          <figure class="dm-ap-thumb" data-fn="ap4">
+            <img src="image/하라 겐야.png" alt="하라 겐야" class="dm-ap-img" />
             <figcaption class="dm-ref-caption">하라 겐야</figcaption>
           </figure>
         </div>
@@ -2151,7 +2151,7 @@
       });
     });
 
-    document.querySelectorAll('.ap-thumb').forEach(function(thumb) {
+    document.querySelectorAll('.dm-ap-thumb').forEach(function(thumb) {
       thumb.addEventListener('click', function(e) {
         e.stopPropagation();
         var isActive = activeThumb === thumb;
