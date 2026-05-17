@@ -2404,18 +2404,18 @@ html, body {
 .ag-form-circle--1 {
   width: 36px;
   height: 36px;
-  animation: ag-c1-glow 4s ease-in-out infinite;
+  animation: ag-c1-glow 2.2s ease-in-out infinite;
 }
 .ag-form-circle--2 {
   width: 90px;
   height: 90px;
-  animation: ag-c2-glow 4s ease-in-out infinite;
+  animation: ag-c2-glow 2.2s ease-in-out infinite;
 }
 .ag-form-circle--3 {
   width: 192px;
   height: 192px;
   background: rgba(152, 251, 152, 0.60);
-  animation: ag-c3-glow 4s ease-in-out infinite;
+  animation: ag-c3-glow 2.2s ease-in-out infinite;
 }
 
 @keyframes ag-c1-glow {
