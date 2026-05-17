@@ -880,6 +880,24 @@
     });
 
     /* ================================================================
+       dm-scroll 클릭 → 다음 섹션 이동
+    ================================================================ */
+    (function () {
+      var dmScroll = document.querySelector('.dm-scroll');
+      dmScroll.addEventListener('click', function (e) {
+        if (e.target.closest('button, a, .dm-u, .dm-hero')) return;
+        var sections = dmScroll.querySelectorAll('.dm-section');
+        var scrollTop = dmScroll.scrollTop;
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].offsetTop > scrollTop + 50) {
+            dmScroll.scrollTo({ top: sections[i].offsetTop, behavior: 'smooth' });
+            return;
+          }
+        }
+      });
+    })();
+
+    /* ================================================================
        hp-project 버튼 클릭 → 안체프로젝트 페이지
     ================================================================ */
     document.getElementById('hp-project').addEventListener('click', function () {
