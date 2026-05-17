@@ -3453,7 +3453,8 @@ html, body {
 }
 
 .dm-home-btn {
-  position: absolute;
+  position: fixed;
+  top: 108px;
   left: 22px;
   background: none;
   border: none;
