@@ -3516,7 +3516,7 @@ html, body {
   width: 100%;
   margin-top: 0;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   cursor: pointer;
   padding: 0 calc(50vw - 366px);
   -webkit-overflow-scrolling: touch;
@@ -3536,7 +3536,8 @@ html, body {
   -webkit-user-drag: none;
   pointer-events: none;
   scroll-snap-align: center;
-  outline: 2px solid black;
+  border: 2px solid black;
+  box-sizing: border-box;
 }
 
 /* 라이트 라벨 */
