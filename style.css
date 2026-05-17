@@ -3736,8 +3736,8 @@ html, body {
 .hm-img-wrap {
   width: clamp(300px, 40.2vw, 772px);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .hm-img {
