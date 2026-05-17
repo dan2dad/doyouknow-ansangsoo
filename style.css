@@ -2516,6 +2516,8 @@ html, body {
 .ag-caption-panel {
   position: absolute;
   width: 300px;
+  max-height: 88vh;
+  overflow-y: auto;
   background: #98FB98;
   border-radius: 5px;
   padding: 24px 20px 24px 24px;
