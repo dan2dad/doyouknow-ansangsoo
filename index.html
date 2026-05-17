@@ -923,12 +923,9 @@
       var agRight    = document.getElementById('ag-caption-right');
       var agTrigger  = document.getElementById('ag-form-circles-trigger');
       var agCircles  = document.querySelector('.ag-form-circles');
+      var savedCx = 0, savedCy = 0;
 
       function drawLines() {
-        var tr = agTrigger.getBoundingClientRect();
-        var cx = tr.left + tr.width  / 2;
-        var cy = tr.top  + tr.height / 2;
-
         var lr = agLeft.getBoundingClientRect();
         var lx = lr.right;
         var ly = lr.top + lr.height * 0.3;
@@ -938,13 +935,22 @@
         var ry = rr.top + rr.height * 0.3;
 
         agSvg.innerHTML =
-          '<line x1="' + cx + '" y1="' + cy + '" x2="' + lx + '" y2="' + ly + '" stroke="#98FB98" stroke-width="7" stroke-linecap="round"/>' +
-          '<line x1="' + cx + '" y1="' + cy + '" x2="' + rx + '" y2="' + ry + '" stroke="#98FB98" stroke-width="7" stroke-linecap="round"/>';
+          '<line x1="' + savedCx + '" y1="' + savedCy + '" x2="' + lx + '" y2="' + ly + '" stroke="#98FB98" stroke-width="7" stroke-linecap="round"/>' +
+          '<line x1="' + savedCx + '" y1="' + savedCy + '" x2="' + rx + '" y2="' + ry + '" stroke="#98FB98" stroke-width="7" stroke-linecap="round"/>';
       }
 
       agTrigger.addEventListener('click', function (e) {
         e.stopPropagation();
+        var tr = agTrigger.getBoundingClientRect();
+        savedCx = tr.left + tr.width  / 2;
+        savedCy = tr.top  + tr.height / 2;
+
         agCircles.classList.add('ag-circles-lit');
+        agCircles.style.position = 'fixed';
+        agCircles.style.left     = savedCx + 'px';
+        agCircles.style.top      = savedCy + 'px';
+        agCircles.style.zIndex   = '55';
+
         agOverlay.classList.add('is-open');
         requestAnimationFrame(drawLines);
       });
@@ -953,6 +959,10 @@
         if (!e.target.closest('.ag-caption-panel')) {
           agOverlay.classList.remove('is-open');
           agCircles.classList.remove('ag-circles-lit');
+          agCircles.style.position = '';
+          agCircles.style.left     = '';
+          agCircles.style.top      = '';
+          agCircles.style.zIndex   = '';
           agSvg.innerHTML = '';
         }
       });
