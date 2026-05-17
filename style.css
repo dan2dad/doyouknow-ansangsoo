@@ -3771,7 +3771,7 @@ html, body {
   display: block;
 }
 
-.hm-chart--chot { left: 0;   top: 22%; }
+.hm-chart--chot { left: 0;   top: 8%; }
 .hm-chart--bat  { right: 0;  top: 0;   }
 .hm-chart--hol  { left: 32%; bottom: 0; }
 
