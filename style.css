@@ -2377,6 +2377,7 @@ html, body {
 /* ── AG 기본 형태 섹션 ── */
 .ag-form-section {
   position: relative;
+  isolation: isolate;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -2385,9 +2386,6 @@ html, body {
 }
 
 .ag-form-u {
-  position: relative;
-  display: inline-block;
-  z-index: 0;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
