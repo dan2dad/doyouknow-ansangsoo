@@ -2442,6 +2442,20 @@ html, body {
   100% { opacity: 0.1; }
 }
 
+.ag-form-trigger {
+  position: absolute;
+  width: 192px;
+  height: 192px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
 .ag-form-title {
   font-family: var(--font-ahn);
   font-size: clamp(36px, 3.65vw, 70px);
@@ -2449,7 +2463,7 @@ html, body {
   color: #000;
   line-height: 1.1;
   position: relative;
-  z-index: 1;
+  z-index: 11;
   margin: 0 0 32px;
 }
 
@@ -2462,7 +2476,59 @@ html, body {
   max-width: 560px;
   text-align: center;
   position: relative;
-  z-index: 1;
+  z-index: 11;
+  margin: 0;
+}
+
+/* 기본 형태 오버레이 */
+.ag-form-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(111, 111, 111, 0.74);
+  z-index: 50;
+  cursor: pointer;
+}
+.ag-form-overlay.is-open { display: block; }
+
+.ag-overlay-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ag-caption-panel {
+  position: absolute;
+  width: 300px;
+  background: #98FB98;
+  border-radius: 5px;
+  padding: 24px 20px 24px 24px;
+  cursor: default;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ag-caption-panel--left  { left: 8%; }
+.ag-caption-panel--right { right: 8%; }
+
+.ag-caption-specimen {
+  font-family: var(--font-ahn);
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+.ag-sp-row       { font-size: 11px; letter-spacing: 0.25em; }
+.ag-sp-row--main { font-size: 18px; letter-spacing: 0.1em; }
+.ag-sp-row--sm   { font-size: 9px;  letter-spacing: 0.3em; }
+
+.ag-caption-text {
+  font-family: var(--font-onul);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.7;
+  color: black;
   margin: 0;
 }
 

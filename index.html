@@ -380,6 +380,7 @@
             <div class="ag-form-circle ag-form-circle--2"></div>
             <div class="ag-form-circle ag-form-circle--1"></div>
           </div>
+          <button class="ag-form-trigger" id="ag-form-circles-trigger" aria-label="기본 형태 자세히 보기"></button>
           <h2 class="ag-form-title">안상수체의 기본 형태</h2>
           <p class="ag-form-desc">안상수는 한글 활자 형태를 크게 두 가지로 구분하고, 네모틀과 탈네모틀 글자꼴은 각각의 목적과 특성을 살리면서 발전할 것이라고 했다. 특히, 탈네모틀 글자꼴의 가능성 대해서 높게 평가했다.</p>
         </div>
@@ -395,6 +396,28 @@
     <!-- 각주 오버레이 (detail-main 안 — 같은 스태킹 컨텍스트) -->
     <div class="fn-overlay" id="fn-overlay"></div>
     <div class="fn-card" id="fn-card"></div>
+
+    <!-- 기본 형태 오버레이 -->
+    <div class="ag-form-overlay" id="ag-form-overlay">
+      <svg class="ag-overlay-svg" id="ag-overlay-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+
+      <div class="ag-caption-panel ag-caption-panel--left" id="ag-caption-left">
+        <div class="ag-caption-specimen">
+          <div class="ag-sp-row">ㄱ ㄲ ㄱ ㄲ ㄱ ㄲ ㄱ ㄲ ㄲ</div>
+          <div class="ag-sp-row ag-sp-row--main">가 각 개 고 곡 과 과 그 극</div>
+          <div class="ag-sp-row ag-sp-row--sm">ㄴ ㄴ ㄴ ㄴ ㄴ</div>
+        </div>
+        <p class="ag-caption-text">(1) 안상수 1952~<br><br><br><br>시각디자이너, 타이포그라퍼. 1985년<br>'안상수체'를 멋지어 한글 글꼴의 탈네모 흐름을 이끌었으며, 이후 이상체, 미르체, 마노체 등을 선보였다. 1988년 실험잡지 「보고서/ 보고서」를 창간, 전위적인 타이포그라피를 실험하며 현재까지 한글 타이포그라피를 바탕으로 한 작업을 선보이고 있다.</p>
+      </div>
+
+      <div class="ag-caption-panel ag-caption-panel--right" id="ag-caption-right">
+        <div class="ag-caption-specimen">
+          <div class="ag-sp-row">ㄱ ㄲ ㄱ ㄱ ㄲ ㄱ ㄲ</div>
+          <div class="ag-sp-row ag-sp-row--main">가 각 개 고 곡 과 과 그 극</div>
+        </div>
+        <p class="ag-caption-text">(2) 안상수 1952~<br><br><br><br>시각디자이너, 타이포그라퍼. 1985년<br>'안상수체'를 멋지어 한글 글꼴의 탈네모 흐름을 이끌었으며, 이후 이상체, 미르체, 마노체 등을 선보였다. 1988년 실험잡지 「보고서/ 보고서」를 창간, 전위적인 타이포그라피를 실험하며 현재까지 한글 타이포그라피를 바탕으로 한 작업을 선보이고 있다.</p>
+      </div>
+    </div>
 
   </div>
 
@@ -893,6 +916,48 @@
             dmScroll.scrollTo({ top: sections[i].offsetTop, behavior: 'smooth' });
             return;
           }
+        }
+      });
+    })();
+
+    /* ================================================================
+       기본 형태 원 클릭 → 캡션 오버레이
+    ================================================================ */
+    (function () {
+      var agOverlay  = document.getElementById('ag-form-overlay');
+      var agSvg      = document.getElementById('ag-overlay-svg');
+      var agLeft     = document.getElementById('ag-caption-left');
+      var agRight    = document.getElementById('ag-caption-right');
+      var agTrigger  = document.getElementById('ag-form-circles-trigger');
+
+      function drawLines() {
+        var tr = agTrigger.getBoundingClientRect();
+        var cx = tr.left + tr.width  / 2;
+        var cy = tr.top  + tr.height / 2;
+
+        var lr = agLeft.getBoundingClientRect();
+        var lx = lr.right;
+        var ly = lr.top + lr.height * 0.3;
+
+        var rr = agRight.getBoundingClientRect();
+        var rx = rr.left;
+        var ry = rr.top + rr.height * 0.3;
+
+        agSvg.innerHTML =
+          '<line x1="' + cx + '" y1="' + cy + '" x2="' + lx + '" y2="' + ly + '" stroke="#98FB98" stroke-width="7" stroke-linecap="round"/>' +
+          '<line x1="' + cx + '" y1="' + cy + '" x2="' + rx + '" y2="' + ry + '" stroke="#98FB98" stroke-width="7" stroke-linecap="round"/>';
+      }
+
+      agTrigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        agOverlay.classList.add('is-open');
+        requestAnimationFrame(drawLines);
+      });
+
+      agOverlay.addEventListener('click', function (e) {
+        if (!e.target.closest('.ag-caption-panel')) {
+          agOverlay.classList.remove('is-open');
+          agSvg.innerHTML = '';
         }
       });
     })();
