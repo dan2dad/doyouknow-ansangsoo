@@ -3733,9 +3733,26 @@ html, body {
 }
 
 
-.hm-img-area {
+.hm-img-wrap {
   width: clamp(300px, 40.2vw, 772px);
-  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hm-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  will-change: transform;
+}
+
+.dm-section--hunmin2 {
+  height: auto;
+  min-height: 60vh;
+  align-items: center;
+  padding: 8vh 0;
+  gap: clamp(32px, 4vh, 56px);
 }
 
 /* 마지막 문장 */
