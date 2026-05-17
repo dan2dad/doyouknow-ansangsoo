@@ -3757,21 +3757,12 @@ html, body {
 
 .hm-charts-wrap {
   position: relative;
-  width: clamp(320px, 60vw, 1160px);
-  height: clamp(240px, 32vw, 620px);
+  width: clamp(320px, 70vw, 1344px);
+  height: clamp(240px, 34vw, 660px);
 }
 
 .hm-chart {
   position: absolute;
-}
-
-.hm-chart-title {
-  color: black;
-  font-size: clamp(13px, 1.25vw, 24px);
-  font-family: OnulHanChe, sans-serif;
-  font-weight: 700;
-  line-height: 1.7;
-  margin: 0 0 6px 0;
 }
 
 .hm-chart-img {
@@ -3782,7 +3773,7 @@ html, body {
 
 .hm-chart--chot { left: 0;   top: 22%; }
 .hm-chart--bat  { right: 0;  top: 0;   }
-.hm-chart--hol  { left: 28%; bottom: 0; }
+.hm-chart--hol  { left: 32%; bottom: 0; }
 
 .hm-img-caption {
   text-align: right;
