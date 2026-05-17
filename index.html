@@ -399,7 +399,32 @@
         <p class="dm-body">안상수체는 첫 닿자와 받침의 형태를 같이 쓰고, 홀자의 위치를 가운데로 맞추어 아주 단순한 구조로 글자체를 설계했고, <span class="dm-u" data-fn="hm1">첫닿자 19자</span>, <span class="dm-u" data-fn="hm2">홀자 21자</span>, <span class="dm-u" data-fn="hm3">받침 27자</span>를 조합하는 방식으로 손쉽게 11,172자를 만들어냈다. <span class="dm-highlight">이는 네모틀 글자체에서 글자마다 형태, 크기, 위치를 변형하여 11,172자를 각각 설계해야 했던 관습에서 벗어난 새롭고도 익숙한 접근이었다.</span></p>
       </div>
 
-      <!-- 섹션 5: 마지막 문장 -->
+      <!-- 섹션 5: 안체프로젝트 A-Project -->
+      <div class="dm-section dm-section--aproject">
+        <h2 class="dm-title">&lt;안체 프로젝트 A-Project&gt;</h2>
+        <div class="ap-grid">
+          <figure class="ap-thumb" data-fn="ap1">
+            <img src="image/네빌 브로디.png" alt="네빌 브로디" class="ap-img" />
+            <figcaption class="dm-ref-caption">네빌 브로디</figcaption>
+          </figure>
+          <figure class="ap-thumb" data-fn="ap2">
+            <img src="image/사랑 쿨카르니.png" alt="사랑 쿨카르니" class="ap-img" />
+            <figcaption class="dm-ref-caption">사랑 쿨카르니</figcaption>
+          </figure>
+          <figure class="ap-thumb" data-fn="ap3">
+            <img src="image/엠엠파리.png" alt="엠엠 파리" class="ap-img" />
+            <figcaption class="dm-ref-caption">엠엠 파리</figcaption>
+          </figure>
+          <figure class="ap-thumb" data-fn="ap4">
+            <img src="image/하라 겐야.png" alt="하라 겐야" class="ap-img" />
+            <figcaption class="dm-ref-caption">하라 겐야</figcaption>
+          </figure>
+        </div>
+        <p class="dm-body">안체 프로젝트는 AG 안상수체 탄생 40주년을 기념해 진행된 프로젝트로, 참여 디자이너들이 AG 안상수체의 모듈을 활용해 새로운 탈네모틀 한글꼴을 제작하고 안상수와 한글에 대한 각자의 생각을 담아내는 연구 프로젝트다. 연구소는 디자이너들이 11,172자의 한글 완성형 글자를 완성할 수 있도록 제작 전 과정을 지원한다.</p>
+        <img src="image/안체프로젝트.png" class="ap-sticker" id="ap-sticker-btn" alt="안체프로젝트 바로가기" />
+      </div>
+
+      <!-- 섹션 6: 마지막 문장 -->
       <div class="dm-section dm-section--closing">
         <div class="dm-closing">영원한 이별은 아니다.</div>
       </div>
@@ -989,17 +1014,17 @@
       home.style.opacity       = '0';
       home.style.pointerEvents = 'none';
 
-      detailAnche.style.transition    = 'none';
-      detailAnche.style.opacity       = '0';
-      detailAnche.style.pointerEvents = 'none';
-      detailAnche.classList.add('dp-in');
-      void detailAnche.offsetHeight;
+      detailMain.style.transition    = 'none';
+      detailMain.style.opacity       = '0';
+      detailMain.style.pointerEvents = 'none';
+      detailMain.classList.add('dp-in');
+      void detailMain.offsetHeight;
 
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
-          detailAnche.style.transition    = 'opacity 0.3s ease';
-          detailAnche.style.opacity       = '1';
-          detailAnche.style.pointerEvents = 'auto';
+          detailMain.style.transition    = 'opacity 0.3s ease';
+          detailMain.style.opacity       = '1';
+          detailMain.style.pointerEvents = 'auto';
         });
       });
 
@@ -1041,6 +1066,37 @@
         detailAnche.style.pointerEvents = '';
         home.style.opacity    = '';
         home.style.transition = '';
+      }, 400);
+    });
+
+    /* ================================================================
+       ap-sticker-btn 클릭 → 안체프로젝트 페이지
+    ================================================================ */
+    document.getElementById('ap-sticker-btn').addEventListener('click', function () {
+      var detailAnche3 = document.getElementById('detail-anche3');
+      detailMain.style.transition    = 'opacity 0.3s ease';
+      detailMain.style.opacity       = '0';
+      detailMain.style.pointerEvents = 'none';
+
+      detailAnche3.style.transition    = 'none';
+      detailAnche3.style.opacity       = '0';
+      detailAnche3.style.pointerEvents = 'none';
+      detailAnche3.classList.add('dp-in');
+      void detailAnche3.offsetHeight;
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          detailAnche3.style.transition    = 'opacity 0.3s ease';
+          detailAnche3.style.opacity       = '1';
+          detailAnche3.style.pointerEvents = 'auto';
+        });
+      });
+
+      setTimeout(function () {
+        detailMain.classList.remove('dp-in');
+        detailMain.style.opacity       = '';
+        detailMain.style.transition    = '';
+        detailMain.style.pointerEvents = '';
       }, 400);
     });
 
@@ -1094,17 +1150,17 @@
       detailAnche3.style.opacity       = '0';
       detailAnche3.style.pointerEvents = 'none';
 
-      detailAnche.style.transition    = 'none';
-      detailAnche.style.opacity       = '0';
-      detailAnche.style.pointerEvents = 'none';
-      detailAnche.classList.add('dp-in');
-      void detailAnche.offsetHeight;
+      detailMain.style.transition    = 'none';
+      detailMain.style.opacity       = '0';
+      detailMain.style.pointerEvents = 'none';
+      detailMain.classList.add('dp-in');
+      void detailMain.offsetHeight;
 
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
-          detailAnche.style.transition    = 'opacity 0.3s ease';
-          detailAnche.style.opacity       = '1';
-          detailAnche.style.pointerEvents = 'auto';
+          detailMain.style.transition    = 'opacity 0.3s ease';
+          detailMain.style.opacity       = '1';
+          detailMain.style.pointerEvents = 'auto';
         });
       });
 
@@ -1113,8 +1169,8 @@
         detailAnche3.style.opacity       = '';
         detailAnche3.style.transition    = '';
         detailAnche3.style.pointerEvents = '';
-        detailAnche.style.opacity        = '';
-        detailAnche.style.transition     = '';
+        detailMain.style.opacity         = '';
+        detailMain.style.transition      = '';
       }, 400);
     });
 
@@ -1997,7 +2053,27 @@
       },
       'hm1': { imgOnly: true },
       'hm2': { imgOnly: true },
-      'hm3': { imgOnly: true }
+      'hm3': { imgOnly: true },
+      'ap1': {
+        title: "네빌 브로디 Neville Brody (1957~)",
+        img:   "image/네빌 브로디.png",
+        text:  "영국 그래픽 디자이너·타이포그래퍼. 잡지 «더 페이스»의 아트디렉터로 이름을 알렸으며, 실험적 타이포그래피와 독창적 그래픽 언어로 1980년대 영국 디자인 씬을 선도했다. 안체 프로젝트에서 안상수체 모듈로 새로운 탈네모틀 한글꼴을 선보였다."
+      },
+      'ap2': {
+        title: "사랑 쿨카르니 Sarang Kulkarni",
+        img:   "image/사랑 쿨카르니.png",
+        text:  "인도 출신 그래픽 디자이너. 활자체 디자인과 인쇄 문화를 중심으로 작업하며, 다양한 문자 체계와 현대 타이포그래피의 접점을 탐구한다. 안체 프로젝트에서 안상수체의 구조적 원리를 재해석한 작업을 선보였다."
+      },
+      'ap3': {
+        title: "엠엠 파리 M/M Paris",
+        img:   "image/엠엠파리.png",
+        text:  "프랑스 파리 기반 디자인 듀오 미카엘 아무나우와 마티아스 아우구스티니아크로 구성. 패션·음악·미술계를 넘나들며 독창적 타이포그래픽 언어를 구축해왔다. 안체 프로젝트에서 안상수체 모듈을 활용한 실험적 한글꼴을 제작했다."
+      },
+      'ap4': {
+        title: "하라 겐야 Kenya Hara 原研哉 (1958~)",
+        img:   "image/하라 겐야.png",
+        text:  "일본 그래픽 디자이너. 무인양품(MUJI)의 아트디렉터로 잘 알려져 있으며, '백(白)'의 개념을 중심으로 여백과 단순함의 미학을 탐구한다. 안체 프로젝트에서 한글의 여백과 구조를 재발견한 작업을 선보였다."
+      }
     };
 
     function buildCard(data) {
@@ -2016,12 +2092,18 @@
     }
 
     var hmSpans = document.querySelectorAll('.dm-u[data-fn^="hm"]');
+    var activeThumb = null;
+
+    function closeApThumb() {
+      if (activeThumb) { activeThumb.classList.remove('ap-active'); activeThumb = null; }
+    }
 
     function closeFn() {
       overlay.classList.remove('is-open');
       card.classList.remove('is-open');
       if (activeSpan) { activeSpan.classList.remove('fn-active'); activeSpan = null; }
       hmSpans.forEach(function(s) { s.classList.remove('fn-active'); });
+      closeApThumb();
     }
 
     document.querySelectorAll('.dm-u[data-fn]').forEach(function (span) {
@@ -2066,6 +2148,41 @@
         card.style.visibility = '';
 
         overlay.classList.add('is-open');
+      });
+    });
+
+    document.querySelectorAll('.ap-thumb').forEach(function(thumb) {
+      thumb.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isActive = activeThumb === thumb;
+        closeFn();
+        if (!isActive) {
+          var fn   = thumb.getAttribute('data-fn');
+          var data = FN_DATA[fn];
+          if (!data) return;
+
+          activeThumb = thumb;
+          thumb.classList.add('ap-active');
+
+          buildCard(data);
+          card.style.visibility = 'hidden';
+          card.classList.add('is-open');
+
+          var rect  = thumb.getBoundingClientRect();
+          var cardW = 276;
+          var cardH = card.offsetHeight;
+          var top   = rect.top - cardH - 16;
+          if (top < 20) top = rect.bottom + 16;
+          var left  = rect.left + rect.width / 2 - cardW / 2;
+          if (left + cardW > window.innerWidth - 20) left = window.innerWidth - cardW - 20;
+          if (left < 20) left = 20;
+
+          card.style.top        = top  + 'px';
+          card.style.left       = left + 'px';
+          card.style.visibility = '';
+
+          overlay.classList.add('is-open');
+        }
       });
     });
 

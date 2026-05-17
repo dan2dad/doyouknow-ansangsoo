@@ -3924,3 +3924,71 @@ html, body {
 /* 홈 타자기 hover */
 .hp-tajagi { cursor: pointer; }
 .hp-tajagi:hover .hp-tajagi-base { filter: brightness(1.05); }
+
+/* ─── 안체프로젝트 A-Project 섹션 ─── */
+.dm-section--aproject {
+  height: auto;
+  min-height: 100vh;
+  align-items: center;
+  padding: 12vh 0;
+  gap: clamp(28px, 3.5vh, 52px);
+  position: relative;
+}
+
+.ap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(6px, 0.8vw, 16px);
+  width: clamp(300px, 40.2vw, 772px);
+}
+
+.ap-thumb {
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ap-thumb:nth-child(1) { animation: hp-drift-2  9s ease-in-out infinite; }
+.ap-thumb:nth-child(2) { animation: hp-drift-1 11s ease-in-out infinite; animation-delay: -3s; }
+.ap-thumb:nth-child(3) { animation: hp-drift-3 10s ease-in-out infinite; animation-delay: -6s; }
+.ap-thumb:nth-child(4) { animation: hp-drift-2 12s ease-in-out infinite; animation-delay: -1.5s; }
+
+.ap-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+  transition: outline 0.15s, box-shadow 0.15s;
+}
+
+.ap-thumb.ap-active {
+  animation-play-state: paused;
+}
+
+.ap-thumb.ap-active .ap-img {
+  outline: 3px solid #98FB98;
+  box-shadow: 0 0 14px rgba(152, 251, 152, 0.45);
+}
+
+.ap-sticker {
+  position: absolute;
+  right: 6vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(110px, 11vw, 198px);
+  cursor: pointer;
+  animation: ap-sticker-pulse 2s ease-in-out infinite;
+}
+
+.ap-sticker:hover {
+  animation-play-state: paused;
+  opacity: 1;
+  transform: translateY(-50%) scale(1.06);
+}
+
+@keyframes ap-sticker-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
