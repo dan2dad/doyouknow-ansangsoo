@@ -1933,6 +1933,7 @@ html, body {
   left: 18.2%;     /* 349/1920 */
   top: 29.8%;      /* 322/1080 */
   animation: hp-drift-2 13s ease-in-out infinite;
+  cursor: pointer;
 }
 .hp-kerning .hp-img {
   width: 12.6vw;   /* 14.8vw × 0.85 */
@@ -2024,6 +2025,7 @@ html, body {
   top: 73.1%;      /* 789/1080 */
   animation: hp-drift-2 11s ease-in-out infinite;
   user-select: none;
+  cursor: pointer;
 }
 .hp-hunmin .hp-img {
   width: 9.8vw;    /* 11.5vw × 0.85 */
@@ -3484,7 +3486,8 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 
@@ -3721,11 +3724,11 @@ html, body {
 
 /* 훈민정음 섹션 */
 .dm-section--hunmin {
-  height: auto;
-  min-height: 100vh;
+  height: 100vh;
   align-items: center;
   padding: 12vh 0;
   gap: clamp(32px, 4vh, 56px);
+  overflow: hidden;
 }
 
 .hm-title {
@@ -3748,11 +3751,11 @@ html, body {
 }
 
 .dm-section--hunmin2 {
-  height: auto;
-  min-height: 100vh;
+  height: 100vh;
   align-items: center;
-  padding: 12vh 0;
-  gap: clamp(48px, 6vh, 80px);
+  padding: 10vh 0;
+  gap: clamp(32px, 5vh, 64px);
+  overflow: hidden;
 }
 
 .hm-charts-wrap {
@@ -3988,6 +3991,51 @@ html, body {
 /* 홈 타자기 hover */
 .hp-tajagi { cursor: pointer; }
 .hp-tajagi:hover .hp-tajagi-base { filter: brightness(1.05); }
+
+/* ─── 큰 인용 섹션 ─── */
+.dm-section--bigquote {
+  justify-content: center;
+  padding: 0 clamp(24px, 5.4vw, 104px);
+}
+
+.dm-bigquote {
+  color: black;
+  font-size: clamp(20px, 3.75vw, 72px);
+  font-family: AGahnsangsoo2012, sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+  text-align: left;
+  margin: 0;
+}
+
+/* ─── 조형적 특징 섹션 ─── */
+.dm-section--charform-intro,
+.dm-section--charform-1,
+.dm-section--charform-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, 3.5vh, 52px);
+  height: 100vh;
+  padding: 10vh 0;
+  overflow: hidden;
+}
+
+.cf-img {
+  width: clamp(280px, 38vw, 720px);
+  height: auto;
+  display: block;
+}
+
+.dm-quote {
+  font-weight: 500;
+}
+
+.dm-sub {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  font-weight: 500;
+}
 
 /* ─── 안체프로젝트 A-Project 섹션 ─── */
 .dm-section--aproject {
