@@ -3491,6 +3491,34 @@ html, body {
 }
 
 
+/* 상단 블러 오버레이 — 콘텐츠가 헤더 근처에서 흐릿하게 사라지는 효과 */
+.dm-blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20vh;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: transparent;
+  pointer-events: none;
+  z-index: 55;
+  -webkit-mask-image: linear-gradient(to bottom,
+    transparent 0vh,
+    transparent 5vh,
+    black 9vh,
+    black 12vh,
+    transparent 18vh
+  );
+  mask-image: linear-gradient(to bottom,
+    transparent 0vh,
+    transparent 5vh,
+    black 9vh,
+    black 12vh,
+    transparent 18vh
+  );
+}
+
 /* 스크롤 영역 */
 .dm-scroll {
   position: absolute;
