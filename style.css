@@ -3502,6 +3502,8 @@ html, body {
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
   scroll-padding-top: 102px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 11%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 11%);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -3569,9 +3571,14 @@ html, body {
   font-family: AGahnsangsoo2012, sans-serif;
   font-weight: 700;
   line-height: 1.1;
+  letter-spacing: -0.03em;
   margin: 0.5vw 0 0 0;
   padding: 0;
   text-align: center;
+}
+
+.dm-title--wide-lh {
+  line-height: 1.5;
 }
 
 /* 콘텐츠 섹션 컨테이너 */
