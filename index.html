@@ -341,19 +341,7 @@
   <!-- 메인 세부 페이지 — 긴 스크롤 콘텐츠 -->
   <div id="detail-main" class="detail-page">
 
-    <!-- 밧줄 -->
-    <div class="dm-rope-wrap" id="dm-rope-wrap">
-      <img src="image/밧줄.png" alt="밧줄" class="dm-rope" id="dm-rope" />
-    </div>
 
-    <!-- 밧줄 오버레이 -->
-    <div class="rope-overlay" id="rope-overlay">
-      <button class="rope-overlay-close" id="rope-overlay-close">✕</button>
-      <div class="rope-tajagi">
-        <img src="image/타자기2.png" alt="종이" class="rope-tajagi-paper" />
-        <img src="image/타자기.png" alt="타자기" class="rope-tajagi-base" />
-      </div>
-    </div>
 
     <!-- 고정 헤더 -->
     <div class="dm-header" id="dm-header">
@@ -529,6 +517,45 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- 밧줄 — 홈 + detail-main 공용 (body 직속) -->
+  <div class="dm-rope-wrap" id="dm-rope-wrap">
+    <img src="image/밧줄.png" alt="밧줄" class="dm-rope" id="dm-rope" />
+  </div>
+
+  <!-- 밧줄 오버레이 — 위에서 내려오는 패널 (body 직속, 항상 최상위) -->
+  <div class="rope-overlay" id="rope-overlay">
+    <!-- 벽돌 배경 -->
+    <img src="image/벽돌.png" class="rope-bg-brick" alt="" />
+    <!-- 반투명 흰 화면 워시 -->
+    <div class="rope-screen-wash"></div>
+
+    <!-- 세벌식 타자기 데코 (우측 상단) -->
+    <div class="rope-tajagi">
+      <div class="rope-tajagi-ribbon"></div>
+      <span class="rope-tajagi-text">세벌식 타자기</span>
+      <img src="image/타자기2.png" alt="종이" class="rope-tajagi-paper" />
+      <img src="image/타자기.png" alt="타자기" class="rope-tajagi-base" />
+    </div>
+
+    <!-- 콘텐츠 박스 -->
+    <div class="rope-content-box">
+      <h2 class="rope-title">이런.일이.있었습니다.</h2>
+      <div class="rope-columns">
+        <div class="rope-col">
+          <p class="rope-col-body">1949 · 공병우 — <br>빨랫줄 글자꼴<br><br>1949년 세벌식 가로쓰기 타자기를 개발한 공병우는 '빨랫줄 글씨'를 탄생하게 했고, 이후 한글 타자기와 워드 프로세서에 사용되면서 탈네모틀 글자꼴의 원형이 되었다. 공속도 타자기에 의한 글자체는 글줄의 무게 중심선이 위에 있으며, 글자의 획수에 따라 글자 크기가 달라지는 조형적 특징을 가졌다. 이러한 '빨랫줄 글자꼴'은 이후 탈네모틀 글자꼴 연구에 큰 영향을 주었다.</p>
+        </div>
+        <div class="rope-col">
+          <p class="rope-col-body">1976 · 조영제 — <br>탈네모틀 글자꼴 최초 학문적 제안<br><br>탈네모틀 글자에 대한 연구는 1960년대 이후로 여러 가지 글자 표현으로 시도되었으나 조영제는 「한글 기계화(타자기)를 위한 구조의 연구」에서 글자꼴 구조에 대한 학문적 연구를 통해 처음으로 글자체에 적용하였다. 조영제의 탈네모틀 글자꼴 연구에서 글줄 기준선은 윗선에 맞춰져 있으며, 세벌식 타자기를 위해 디자인하여 낱자의 형태가 그대로 살아 있는 반면 낱글자의 형태를 네모틀 안에 국한하지 않고 자유롭게 취함으로써 글자의 밀도가 고르게 분포하도록 했다.</p>
+        </div>
+        <div class="rope-col">
+          <p class="rope-col-body">1977 · 김인철 — <br>알파벳 기준선 응용<br><br>1977년 김인철은 알파벳의 기준선을 응용하여 한글의 기준선을 만들고, 아래쪽에서 들쑥날쑥하게 하여 생긴 리듬감으로 한글의 가독성을 높이려고 시도했다. 일정한 기준에 따라 닿소리와 홑소리 글자가 모아지면서 가지런한 가로 글줄 균형선이 이루어지도록 하였다.</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="rope-overlay-close" id="rope-overlay-close">✕</button>
   </div>
 
   <!-- 안체프로젝트 세부 페이지 2 — 나만의 안체 만들기 -->
@@ -2362,48 +2389,85 @@
     dmScroll.addEventListener('scroll', update, { passive: true });
   })();
 
-  /* ── 밧줄 드래그 → 오버레이 ── */
+  /* ── 밧줄 + 패널 동기 인터랙션 ── */
   (function() {
-    var wrap    = document.getElementById('dm-rope-wrap');
-    var rope    = document.getElementById('dm-rope');
-    var overlay = document.getElementById('rope-overlay');
+    var wrap     = document.getElementById('dm-rope-wrap');
+    var rope     = document.getElementById('dm-rope');
+    var overlay  = document.getElementById('rope-overlay');
     var closeBtn = document.getElementById('rope-overlay-close');
     if (!wrap || !rope || !overlay) return;
 
-    var THRESHOLD = 130;
-    var MAX_DRAG  = 220;
+    var THRESHOLD = 50;
     var dragging  = false;
     var startY    = 0;
     var delta     = 0;
-    var moved     = false;
+    var isOpen    = false;
 
+    /* 밧줄 이미지 실제 높이 */
+    function ropeH() { return rope.offsetHeight || 465; }
+    /* 밧줄 끝이 화면 바닥에 딱 닿는 translateY */
+    function ropeDown() { return window.innerHeight + 40 - ropeH(); }
+    /* 80px만 화면 상단에 살짝 보이는 translateY (조금 남게) */
+    function ropeRest() { return 120 - ropeH(); }
+
+    /* 열기: 오버레이 내려옴 / 밧줄은 오버레이 바닥에 달려 화면 아래로 숨어버림 */
     function openOverlay() {
-      overlay.style.display = 'block';
-      overlay.style.transition = 'opacity 0.3s ease';
-      overlay.style.opacity = '1';
-      overlay.classList.add('is-open');
-      wrap.style.pointerEvents = 'none';
-      wrap.style.zIndex = '0';
-    }
-
-    function closeOverlay() {
-      overlay.classList.remove('is-open');
-      overlay.style.transition = 'opacity 0.3s ease';
-      overlay.style.opacity = '0';
+      isOpen = true;
+      /* CSS rope-pull 애니메이션이 JS transform을 방해하지 못하도록 즉시 정지 */
       wrap.classList.add('has-seen');
-      wrap.style.pointerEvents = '';
-      wrap.style.zIndex = '';
-      setTimeout(function() {
-        overlay.style.display = 'none';
-        overlay.style.opacity = '';
-      }, 300);
+      wrap.style.animation        = 'none';
+      overlay.style.transition    = 'transform 1.6s cubic-bezier(0.5,0,0.15,1)';
+      overlay.style.transform     = 'translateY(0)';
+      overlay.style.pointerEvents = 'auto';
+      wrap.style.transition       = 'transform 1.6s cubic-bezier(0.5,0,0.15,1)';
+      wrap.style.transform        = 'translateY(' + (window.innerHeight + 40) + 'px)';
+      wrap.style.pointerEvents    = 'none';
+      wrap.style.zIndex           = '';
     }
 
+    /* 닫기: 오버레이 바닥이 밧줄 상단에 붙어 같이 올라옴 */
+    function closeOverlay() {
+      isOpen = false;
+      overlay.style.pointerEvents = 'none';
+      overlay.style.transition    = 'transform 0.7s cubic-bezier(0.4,0,0.2,1)';
+      overlay.style.transform     = 'translateY(-100%)';
+      /* 밧줄도 오버레이와 동일하게 window.innerHeight만큼 위로 → 바닥이 붙어 올라옴 */
+      wrap.style.zIndex           = '125';
+      wrap.style.transition       = 'transform 0.7s cubic-bezier(0.4,0,0.2,1)';
+      wrap.style.transform        = 'translateY(40px)';   /* (innerHeight+40) - innerHeight = 40 */
+      wrap.style.pointerEvents    = '';
+      wrap.classList.add('has-seen');
+      /* 올라간 뒤 ropeRest() 위치로 자리잡기 */
+      setTimeout(function() {
+        wrap.style.transition = 'transform 0.35s ease';
+        wrap.style.transform  = 'translateY(' + ropeRest() + 'px)';
+        setTimeout(function() { wrap.style.zIndex = ''; }, 400);
+      }, 720);
+    }
+
+    /* 충분히 안 당김 → 원위치 복귀 */
+    function snapBack() {
+      overlay.style.transition = 'transform 0.4s ease';
+      overlay.style.transform  = 'translateY(-100%)';
+      wrap.style.transition    = 'transform 0.4s ease';
+      wrap.style.transform     = 'translateY(0)';
+      wrap.style.zIndex        = '';
+      wrap.style.pointerEvents = '';
+    }
+
+    /* ── 밧줄 드래그 / 클릭 ── */
     wrap.addEventListener('pointerdown', function(e) {
       dragging = true;
-      moved = false;
-      startY = e.clientY;
-      delta = 0;
+      startY   = e.clientY;
+      delta    = 0;
+      wrap.classList.add('has-seen');
+      wrap.style.animation     = 'none';
+      wrap.style.transition    = 'none';
+      wrap.style.transform     = 'translateY(0)';
+      overlay.style.transition = 'none';
+      /* 통일한 시작점: overlay 바닥 = 밧줄 top = -40px */
+      overlay.style.transform  = 'translateY(' + (-window.innerHeight - 40) + 'px)';
+      wrap.style.zIndex        = '130';
       wrap.classList.add('is-dragging');
       wrap.setPointerCapture(e.pointerId);
       e.preventDefault();
@@ -2411,35 +2475,48 @@
 
     wrap.addEventListener('pointermove', function(e) {
       if (!dragging) return;
-      delta = Math.min(Math.max(0, e.clientY - startY), MAX_DRAG);
-      if (delta > 5) moved = true;
-      rope.style.transform = 'translateY(' + delta + 'px)';
-      overlay.style.display = 'block';
-      overlay.style.transition = 'none';
-      overlay.style.opacity = Math.min(delta / THRESHOLD, 1);
+      var d = ropeDown();
+      delta = Math.min(Math.max(0, e.clientY - startY), d * 1.1);
+      /* 밧줄 이동 */
+      wrap.style.transform    = 'translateY(' + delta + 'px)';
+      /* 오버레이 바닥 = 밧줄 top: overlay_ty = delta - innerHeight - 40 */
+      overlay.style.transform = 'translateY(' + (delta - window.innerHeight - 40) + 'px)';
     });
 
     wrap.addEventListener('pointerup', function() {
       if (!dragging) return;
       dragging = false;
       wrap.classList.remove('is-dragging');
-      rope.style.transform = '';
+      /* delta 10px 미만이면 클릭으로 판단 → 바로 열기 */
       if (delta < 10 || delta >= THRESHOLD) {
         openOverlay();
       } else {
-        overlay.style.transition = 'opacity 0.2s ease';
-        overlay.style.opacity = '0';
-        setTimeout(function() {
-          overlay.style.display = 'none';
-          overlay.style.opacity = '';
-        }, 200);
+        snapBack();
       }
       delta = 0;
-      moved = false;
     });
 
-    overlay.addEventListener('click', closeOverlay);
-    closeBtn.addEventListener('click', function(e) { e.stopPropagation(); closeOverlay(); });
+    wrap.addEventListener('pointercancel', function() {
+      if (!dragging) return;
+      dragging = false;
+      wrap.classList.remove('is-dragging');
+      snapBack();
+      delta = 0;
+    });
+
+    /* ── X 닫기 버튼 ── */
+    closeBtn.addEventListener('pointerdown', function(e) { e.stopPropagation(); });
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeOverlay();
+    });
+
+    /* ── 오버레이 클릭/탭 → 닫기 (X 버튼 클릭은 제외) ── */
+    overlay.addEventListener('click', function(e) {
+      if (e.target.closest('.rope-overlay-close')) return;
+      if (!isOpen) return;
+      closeOverlay();
+    });
   })();
   </script>
 

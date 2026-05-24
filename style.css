@@ -3488,23 +3488,27 @@ html, body {
   top: -40px;
   right: 8%;
   width: 45px;
-  height: calc(100vh + 40px);
+  height: auto;           /* 밧줄 이미지 높이에 맞춤 */
   z-index: 101;
-  pointer-events: auto;
   cursor: grab;
   animation: rope-pull 2s ease-in-out infinite;
+  display: none;
+  pointer-events: none;
 }
-
+/* detail-main 활성 시 밧줄 표시 */
+#detail-main.dp-in ~ .dm-rope-wrap {
+  display: block;
+  pointer-events: auto;
+}
+/* 밧줄 이미지 하나 — 원본 크기 */
 .dm-rope {
   display: block;
   width: 45px;
   height: auto;
-  -webkit-user-drag: none;
-  margin-top: 0;
-  transition: margin-top 1.2s ease;
+  pointer-events: none;
 }
-.dm-rope-wrap.has-seen .dm-rope {
-  margin-top: -320px;
+.dm-rope-wrap.has-seen {
+  animation: none;   /* 위치는 JS inline transform이 제어 */
 }
 .dm-rope-wrap:active { cursor: grabbing; }
 .dm-rope-wrap.is-dragging { animation: none; }
@@ -3512,41 +3516,129 @@ html, body {
   animation: none;
 }
 
+/* ── rope overlay: 위에서 내려오는 패널 ── */
 .rope-overlay {
-  display: none;
   position: fixed;
   inset: 0;
-  background: rgba(80, 80, 80, 0.85);
-  z-index: 55;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  z-index: 120;
+  transform: translateY(-100%);
+  pointer-events: none;
+  overflow: hidden;
+  will-change: transform;
+  background: #f0ece6;
 }
-.rope-overlay.is-open {
-  display: block;
-  opacity: 1;
+
+.rope-bg-brick {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: auto;
+  pointer-events: none;
+  opacity: 0.85;
 }
+
+.rope-screen-wash {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.50);
+  pointer-events: none;
+}
+
+/* 콘텐츠 박스 */
+.rope-content-box {
+  position: absolute;
+  left: 12%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 74%;
+  background: rgba(255, 255, 255, 0.70);
+  padding: 3% 3% 3.5%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.rope-title {
+  font-family: AGahnsangsoo2012, sans-serif;
+  font-weight: 700;
+  font-size: clamp(24px, 3.6vw, 70px);
+  color: #000;
+  margin: 0 0 5% 0;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.rope-columns {
+  display: flex;
+  gap: 3%;
+}
+
+.rope-col {
+  flex: 1;
+}
+
+.rope-col-body {
+  font-family: 'OnulHanChe', sans-serif;
+  font-weight: 700;
+  font-size: clamp(10px, 1vw, 19px);
+  line-height: 1.72;
+  color: #000;
+  margin: 0;
+}
+
+.rope-bottom-cord {
+  position: absolute;
+  right: 8%;
+  bottom: 0;
+  width: 45px;
+  height: auto;
+  pointer-events: none;
+  z-index: 5;
+  animation: rope-pull 2s ease-in-out infinite;
+}
+
 .rope-overlay-close {
   position: absolute;
-  top: 32px;
-  right: 40px;
+  top: 20px;
+  right: 28px;
   background: none;
   border: none;
-  color: #fff;
-  font-size: 28px;
+  color: #000;
+  font-size: 22px;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.45;
+  z-index: 10;
 }
 .rope-overlay-close:hover { opacity: 1; }
 
-/* 타자기 스티커 — 오버레이 우측 상단 */
+/* 타자기 데코 — 우측 상단 */
 .rope-tajagi {
   position: absolute;
-  right: 6%;
-  top: 5%;
-  width: 9vw;
+  right: 3%;
+  top: 2%;
+  width: 11vw;
+  min-width: 120px;
   pointer-events: none;
-  animation: hp-drift-1 9s ease-in-out infinite;
 }
+
+.rope-tajagi-ribbon {
+  position: absolute;
+  right: -8px;
+  top: -28px;
+  width: 28%;
+  height: 150%;
+  background: #CDFFE8;
+  transform: rotate(47deg);
+  transform-origin: top center;
+  z-index: 0;
+}
+
+.rope-tajagi-text {
+  display: none;
+}
+
 .rope-tajagi-base {
   display: block;
   position: absolute;
@@ -3556,6 +3648,7 @@ html, body {
   height: auto;
   z-index: 2;
 }
+
 .rope-tajagi-paper {
   display: block;
   position: absolute;
