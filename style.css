@@ -4402,3 +4402,107 @@ html, body {
 }
 
 
+
+/* ================================================================
+   Mobile Responsive Styles (max-width: 768px)
+================================================================ */
+@media (max-width: 768px) {
+  /* ── 1. 홈 페이지 캔버스 크기/위치 조정 ── */
+  .hp-title {
+    font-size: clamp(24px, 8vw, 40px);
+    width: 90%;
+    white-space: normal;
+    top: 5%;
+    left: 5%;
+  }
+  .hp-ag {
+    top: 92%;
+    left: 5%;
+  }
+
+  /* 홈 화면 떠다니는 이미지 재배치 및 크기 확장 */
+  .hp-kerning { top: 22%; left: 5%; }
+  .hp-kerning .hp-img { width: 35vw; }
+
+  .hp-expand { top: 25%; left: 55%; }
+  .hp-expand .hp-img { width: 30vw; }
+
+  .hp-hak { top: 40%; left: 50%; }
+  .hp-hak .hp-img { width: 40vw; }
+
+  .hp-hunmin { top: 45%; left: 5%; }
+  .hp-hunmin .hp-img { width: 30vw; }
+
+  .hp-joyoungjae { top: 60%; left: 10%; }
+  .hp-joyoungjae .hp-img { width: 25vw; }
+
+  .hp-project-wrap { top: 65%; left: 50%; }
+  .hp-proj-img { width: 45vw; }
+
+  .hp-blob { top: 80%; left: 5%; }
+  .hp-blob .hp-img { width: 40vw; }
+
+  .hp-brick-wrap { top: 82%; left: 55%; }
+  .hp-brick-img { width: 25vw; }
+
+  .hp-sijakagi { font-size: 16px; margin-top: 6px; }
+
+  /* 네비게이션(우측상단) 조정 */
+  #hp-hanbun {
+    position: absolute;
+    top: 2%;
+    left: auto; right: 28%;
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+  #hp-meotjieun {
+    position: absolute;
+    top: 2%;
+    left: auto; right: 5%;
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+  .home-page.hp-in {
+    /* 우측상단에 고정되지 않고 일반 흐름으로 변경되거나, 상단에 고정 */
+  }
+
+  /* ── 2. 세부 페이지 (detail-main) 본문 및 여백 조정 ── */
+  .dm-header { padding: 10px 14px; }
+  .dm-section { padding: 30px 20px; }
+  
+  /* 오프닝 스토리 */
+  .dm-section--story { padding: 0 5vw; }
+  .dm-story-text { font-size: clamp(20px, 5.5vw, 28px); }
+
+  /* 제목 및 텍스트 폰트 */
+  .dm-title { font-size: 26px; }
+  .dm-body { font-size: 15px; line-height: 1.8; }
+  .dm-bigquote { font-size: 20px; padding: 20px 14px; border-width: 3px; }
+
+  /* ── 3. 다단 레이아웃 1단(세로)으로 변경 ── */
+  .dm-hero { flex-direction: column; }
+  .dm-hero-img { width: 100%; }
+  
+  .dm-ap-grid { grid-template-columns: 1fr 1fr; gap: 10px; } /* 4단 -> 2단 */
+  .rope-columns { grid-template-columns: 1fr; gap: 24px; } /* 3단 -> 1단 */
+  
+  .dm-ref-row { flex-direction: column; align-items: flex-start; }
+  .dm-ref-img { max-width: 100%; }
+
+  .hm-charts-wrap { flex-direction: column; align-items: center; }
+  .hm-chart { width: 80%; margin-bottom: 10px; }
+
+  /* ── 4. 밧줄 및 기타 크기 조정 ── */
+  .dm-rope-wrap { right: 4%; }
+  .dm-rope { width: 35px; }
+  
+  .rope-content-box { padding: 20px 16px; margin: 10px 4%; }
+  .rope-title { font-size: 28px; }
+
+  .ag-form-circles { transform: scale(0.6); transform-origin: left top; }
+  
+  /* ── 5. 서브 페이지 패널 (나만의 안체 만들기 등) ── */
+  #detail-anche3 { flex-direction: column; overflow-y: auto; }
+  .ap3-ctrl-col { width: 100%; border-left: none; border-top: 1.5px solid var(--border); padding-bottom: 80px; }
+  .ap3-main { min-height: 50vh; }
+}
