@@ -31,11 +31,6 @@
       <img src="image/그룹커닝.png" alt="그룹커닝" class="hp-img" />
     </div>
 
-    <!-- 타자기: 631,514 / rotate:28deg -->
-    <div class="hp-tajagi" id="hp-tajagi">
-      <img src="image/타자기2.png" alt="종이" class="hp-tajagi-paper" />
-      <img src="image/타자기.png" alt="타자기" class="hp-tajagi-base" />
-    </div>
 
     <!-- 학 (교체된 이미지): 1500,234 -->
     <div class="hp-hak">
@@ -354,6 +349,10 @@
     <!-- 밧줄 오버레이 -->
     <div class="rope-overlay" id="rope-overlay">
       <button class="rope-overlay-close" id="rope-overlay-close">✕</button>
+      <div class="rope-tajagi">
+        <img src="image/타자기2.png" alt="종이" class="rope-tajagi-paper" />
+        <img src="image/타자기.png" alt="타자기" class="rope-tajagi-base" />
+      </div>
     </div>
 
     <!-- 고정 헤더 -->
@@ -2414,7 +2413,7 @@
       dragging = false;
       wrap.classList.remove('is-dragging');
       rope.style.transform = '';
-      if (!moved || delta >= THRESHOLD) {
+      if (delta < 10 || delta >= THRESHOLD) {
         openOverlay();
       } else {
         overlay.style.transition = 'opacity 0.2s ease';

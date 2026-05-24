@@ -3488,24 +3488,26 @@ html, body {
   top: -40px;
   right: 8%;
   width: 45px;
-  z-index: 60;
+  height: calc(100vh + 40px);
+  z-index: 101;
   pointer-events: auto;
   cursor: grab;
-  transition: top 1.2s ease;
   animation: rope-pull 2s ease-in-out infinite;
 }
-.dm-rope-wrap.has-seen {
-  top: -350px;
-}
-.dm-rope-wrap:active { cursor: grabbing; }
-.dm-rope-wrap.is-dragging { animation: none; }
 
 .dm-rope {
   display: block;
   width: 45px;
   height: auto;
   -webkit-user-drag: none;
+  margin-top: 0;
+  transition: margin-top 1.2s ease;
 }
+.dm-rope-wrap.has-seen .dm-rope {
+  margin-top: -320px;
+}
+.dm-rope-wrap:active { cursor: grabbing; }
+.dm-rope-wrap.is-dragging { animation: none; }
 .dm-rope.is-dragging {
   animation: none;
 }
@@ -3535,6 +3537,35 @@ html, body {
   opacity: 0.7;
 }
 .rope-overlay-close:hover { opacity: 1; }
+
+/* 타자기 스티커 — 오버레이 우측 상단 */
+.rope-tajagi {
+  position: absolute;
+  right: 6%;
+  top: 5%;
+  width: 9vw;
+  pointer-events: none;
+  animation: hp-drift-1 9s ease-in-out infinite;
+}
+.rope-tajagi-base {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 5vh;
+  width: 80%;
+  height: auto;
+  z-index: 2;
+}
+.rope-tajagi-paper {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 68%;
+  height: auto;
+  z-index: 1;
+  animation: paper-pull 3.5s ease-in-out infinite;
+}
 
 .dm-header {
   position: fixed;
