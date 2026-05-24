@@ -3506,6 +3506,15 @@ html, body {
   width: 45px;
   height: auto;
   pointer-events: none;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.dm-rope-wrap.fade-out {
+  pointer-events: none !important;
+}
+.dm-rope-wrap.fade-out .dm-rope {
+  opacity: 0;
+  transform: translateY(-150px);
 }
 .dm-rope-wrap.has-seen {
   animation: none;   /* 위치는 JS inline transform이 제어 */

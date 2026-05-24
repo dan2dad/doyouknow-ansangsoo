@@ -2405,6 +2405,7 @@
     var dmScroll  = document.querySelector('#detail-main .dm-scroll');
     var clipRect  = document.getElementById('dm-clip-rect');
     var rightD    = document.getElementById('dm-right-d');
+    var ropeWrap  = document.getElementById('dm-rope-wrap');
 
     function update() {
       var max = dmScroll.scrollHeight - dmScroll.clientHeight;
@@ -2412,6 +2413,14 @@
       clipRect.setAttribute('width', 1843 * p);
       rightD.setAttribute('transform', 'translate(' + (1843 * (p - 1)) + ',0)');
       rightD.style.opacity = p < 0.04 ? 0 : 1;
+
+      if (ropeWrap) {
+        if (dmScroll.scrollTop > window.innerHeight * 0.3) {
+          ropeWrap.classList.add('fade-out');
+        } else {
+          ropeWrap.classList.remove('fade-out');
+        }
+      }
     }
 
     update();
