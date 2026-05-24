@@ -1833,6 +1833,12 @@ html, body {
    ══════════════════════════════════════ */
 
 /* 플로팅 keyframes — 3가지 궤도 */
+@keyframes hp-bob {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-80px); }
+  100% { transform: translateY(0); }
+}
+
 @keyframes hp-drift-1 {
   0%   { transform: translate(0, 0); }
   25%  { transform: translate(10px, -14px); }
@@ -1870,7 +1876,7 @@ html, body {
   opacity: 1;
 }
 
-/* 이미지 공통 */
+/* ── 이미지 공통 ── */
 .hp-img {
   display: block;
   max-width: 100%;
@@ -1880,15 +1886,13 @@ html, body {
   -webkit-user-drag: none;
 }
 
-/* ── 상단 타이틀 ── */
-/* ── 홈 타이틀 ── */
-/* Figma: left:96, top:72 / 1920×1080 */
+/* ── 상단 타이틀: 96,10 ── */
 .hp-title {
   position: absolute;
-  left: 5%;        /* 96/1920 */
-  top: 6.7%;       /* 72/1080 */
+  left: 5%;
+  top: 0.9%;
   font-family: var(--font-ahn);
-  font-size: clamp(24px, 4.26vw, 82px);  /* 81.75px @ 1920 */
+  font-size: clamp(24px, 4.26vw, 82px);
   font-weight: 800;
   color: #000;
   line-height: 1.2;
@@ -1899,9 +1903,7 @@ html, body {
   padding: 0;
   cursor: pointer;
 }
-.hp-title:hover {
-  opacity: 0.7;
-}
+.hp-title:hover { opacity: 0.7; }
 
 /* ── AG (히든 클릭 트리거) ── */
 .hp-ag {
@@ -1917,41 +1919,26 @@ html, body {
   white-space: nowrap;
 }
 
-/* ── 이미지 공통 ── */
-.hp-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  user-select: none;
-  pointer-events: none;
-  -webkit-user-drag: none;
-}
-
-/* ── 그룹커닝: 349,322 / 284×142 ── */
+/* ── 그룹커닝: 343,278 ── */
 .hp-kerning {
   position: absolute;
-  left: 18.2%;     /* 349/1920 */
-  top: 29.8%;      /* 322/1080 */
+  left: 17.9%;
+  top: 25.7%;
   animation: hp-drift-2 13s ease-in-out infinite;
   cursor: pointer;
 }
 .hp-kerning .hp-img {
-  width: 12.6vw;   /* 14.8vw × 0.85 */
+  width: 11.5vw;
   height: auto;
 }
 
-/* ── 세벌식 타자기 래퍼 ──
-   Figma: 타자기(843,322/251×252), 타자기2(974,234/212×207)
-   래퍼를 타자기2의 top에 맞춤 → left:43.9%, top:21.7%
-   base는 래퍼 안에서 아래로 88px(8.1vh) 내림
-   paper는 래퍼 안에서 오른쪽으로 131px(6.82vw) 이동, top:0
-*/
+/* ── 타자기: 843,322/251×252 + 타자기2: 974,234/212×207 ── */
 .hp-tajagi {
   position: absolute;
   left: 43.9%;
   top: 21.7%;
-  width: 17vw;     /* 20vw × 0.85 */
-  height: 26.7vh;  /* 31.4vh × 0.85 */
+  width: 17vw;
+  height: 26.7vh;
   animation: hp-drift-1 9s ease-in-out infinite;
   user-select: none;
 }
@@ -1959,8 +1946,8 @@ html, body {
   display: block;
   position: absolute;
   left: 0;
-  top: 6.9vh;      /* 8.1vh × 0.85 */
-  width: 11.1vw;   /* 13.1vw × 0.85 */
+  top: 6.9vh;
+  width: 8.8vw;
   height: auto;
   z-index: 2;
   pointer-events: none;
@@ -1969,16 +1956,15 @@ html, body {
 .hp-tajagi-paper {
   display: block;
   position: absolute;
-  left: 5.8vw;     /* 6.82vw × 0.85 */
+  left: 5.8vw;
   top: 0;
-  width: 9.4vw;    /* 11.04vw × 0.85 */
+  width: 7.5vw;
   height: auto;
   z-index: 1;
   pointer-events: none;
   -webkit-user-drag: none;
   animation: paper-pull 3.5s ease-in-out infinite;
 }
-/* 타자기2: 종이 중심이 타자기1 중심에서 출발 → 우상단으로 뽑혀 나왔다가 사라짐 */
 @keyframes paper-pull {
   0%   { transform: translate(-5.8vw, 10.2vh); opacity: 0; }
   20%  { opacity: 1; }
@@ -1987,16 +1973,16 @@ html, body {
   100% { transform: translate(-5.8vw, 10.2vh); opacity: 0; }
 }
 
-/* ── 학: 1532,264 / 244×257 ── */
+/* ── 학: 1500,234 ── */
 .hp-hak {
   position: absolute;
-  left: 79.8%;     /* 1532/1920 */
-  top: 29.8%;      /* 322/1080 — 타자기 상단에 맞춤 */
+  left: 78.1%;
+  top: 21.7%;
   animation: hp-drift-3 12s ease-in-out infinite;
   user-select: none;
 }
 .hp-hak .hp-img {
-  width: 10.8vw;   /* 12.7vw × 0.85 */
+  width: 10vw;
   height: auto;
   animation: spin-slow 12s linear infinite;
   transform-origin: center center;
@@ -2006,50 +1992,56 @@ html, body {
   to   { transform: rotate(360deg); }
 }
 
-/* ── 확장: 134,475 / 275×515 ── */
+/* ── 확장: 조영제 좌측 하단, 타자기와 동일 각도 ── */
 .hp-expand {
   position: absolute;
-  left: 7%;        /* 134/1920 */
-  top: 44%;        /* 475/1080 */
+  left: 24%;
+  top: 47%;
   user-select: none;
 }
 .hp-expand .hp-img {
-  width: 12.2vw;   /* 14.3vw × 0.85 */
+  width: 8vw;
   height: auto;
+  transform: rotate(-45deg);
+  transform-origin: top right;
 }
 
-/* ── 훈민정음: 811,789 / 220×194 ── */
+/* ── 훈민정음 책: 137,490 / rotate:-15deg ── */
 .hp-hunmin {
   position: absolute;
-  left: 42.2%;     /* 811/1920 */
-  top: 73.1%;      /* 789/1080 */
-  animation: hp-drift-2 11s ease-in-out infinite;
+  left: 7.1%;
+  top: 45.4%;
+  animation: hp-drift-1 11s ease-in-out infinite;
   user-select: none;
   cursor: pointer;
 }
 .hp-hunmin .hp-img {
-  width: 9.8vw;    /* 11.5vw × 0.85 */
+  width: 6vw;
   height: auto;
+  transform: rotate(-15deg);
+  transform-origin: top left;
 }
 
-/* ── 조영제: 680,546 / 193×187 ── */
+/* ── 조영제/한글그리드: 990,385 ── */
 .hp-joyoungjae {
   position: absolute;
-  left: 35.4%;     /* 680/1920 */
-  top: 50.6%;      /* 546/1080 */
-  animation: hp-drift-3 11s ease-in-out infinite;
+  left: 51.6%;
+  top: 35.6%;
+  animation: hp-drift-2 11s ease-in-out infinite;
   user-select: none;
 }
 .hp-joyoungjae .hp-img {
-  width: 8.5vw;    /* 10vw × 0.85 */
+  width: 6vw;
   height: auto;
+  transform: rotate(30deg);
+  transform-origin: top left;
 }
 
-/* ── 안체프로젝트 버튼: 1118,475 / 352×306 ── */
+/* ── 안체프로젝트 버튼: 1156,546 ── */
 .hp-project-wrap {
   position: absolute;
-  left: 58.2%;     /* 1118/1920 */
-  top: 44%;        /* 475/1080 */
+  left: 60.2%;
+  top: 50.6%;
   animation: hp-drift-2 10s ease-in-out infinite;
 }
 .hp-project-obj {
@@ -2062,7 +2054,7 @@ html, body {
 }
 .hp-proj-img {
   display: block;
-  width: 15.6vw;   /* 18.3vw × 0.85 */
+  width: 12vw;
   height: auto;
   pointer-events: none;
   -webkit-user-drag: none;
@@ -2072,20 +2064,55 @@ html, body {
   transition: opacity 0.15s;
 }
 
-/* ── 멋지음안상수: 1428,708 / 348×275 ── */
+/* ── 멋지음안상수: 287,815 / 좌측 하단 ── */
 .hp-blob {
   position: absolute;
-  left: 74.4%;     /* 1428/1920 */
-  top: 65.6%;      /* 708/1080 */
+  left: 14.9%;
+  top: 75.5%;
   animation: hp-drift-1 14s ease-in-out infinite;
   user-select: none;
 }
 .hp-blob .hp-img {
-  width: 15.4vw;   /* 18.1vw × 0.85 */
+  width: 12.5vw;
   height: auto;
 }
 
-/* ── 홈 네비 버튼: 한눈에 보기 / 멋지은 이들 ── */
+/* ── 벽돌 + 시작하기: 1416,756 ── */
+.hp-brick-wrap {
+  position: absolute;
+  left: 73.8%;
+  top: 70%;
+  user-select: none;
+  animation: hp-bob 2s ease-in-out infinite;
+}
+.hp-brick-img {
+  display: block;
+  width: 22vw;
+  height: auto;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.hp-sijakagi {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #fff;
+  font-family: var(--font-ahn);
+  font-size: clamp(20px, 2.6vw, 50px);
+  font-weight: 700;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hp-sijakagi:hover { opacity: 0.7; }
+
+/* ── 홈 네비 버튼: 한눈에 보기(1563,10) / 멋지은 이들(1711,10) ── */
 .hp-nav-btn {
   position: absolute;
   background: none;
@@ -2095,12 +2122,12 @@ html, body {
   color: black;
   font-size: clamp(14px, 1.875vw, 36px);
   font-family: AGahnsangsoo2012, sans-serif;
-  font-weight: 300;
+  font-weight: 700;
   white-space: nowrap;
 }
-.hp-nav-btn:hover {
-  opacity: 0.6;
-}
+#hp-hanbun    { left: 81.4%; top: 0.9%; }
+#hp-meotjieun { left: 89.1%; top: 0.9%; }
+.hp-nav-btn:hover { opacity: 0.6; }
 
 /* ══════════════════════════════════════
    스 세부 페이지
@@ -3450,6 +3477,65 @@ html, body {
 ================================================================ */
 
 /* 고정 헤더 */
+@keyframes rope-pull {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(30px); }
+  100% { transform: translateY(0); }
+}
+
+.dm-rope-wrap {
+  position: fixed;
+  top: -40px;
+  right: 8%;
+  width: 45px;
+  z-index: 60;
+  pointer-events: auto;
+  cursor: grab;
+  transition: top 1.2s ease;
+  animation: rope-pull 2s ease-in-out infinite;
+}
+.dm-rope-wrap.has-seen {
+  top: -350px;
+}
+.dm-rope-wrap:active { cursor: grabbing; }
+.dm-rope-wrap.is-dragging { animation: none; }
+
+.dm-rope {
+  display: block;
+  width: 45px;
+  height: auto;
+  -webkit-user-drag: none;
+}
+.dm-rope.is-dragging {
+  animation: none;
+}
+
+.rope-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(80, 80, 80, 0.85);
+  z-index: 55;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.rope-overlay.is-open {
+  display: block;
+  opacity: 1;
+}
+.rope-overlay-close {
+  position: absolute;
+  top: 32px;
+  right: 40px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.rope-overlay-close:hover { opacity: 1; }
+
 .dm-header {
   position: fixed;
   top: 0;

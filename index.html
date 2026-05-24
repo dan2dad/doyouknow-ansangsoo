@@ -26,19 +26,18 @@
     <!-- 상단 타이틀 -->
     <button class="hp-title" id="hp-title">안상수체에.대해.얼마나.알고.있니</button>
 
-
-    <!-- 그룹커닝: 349, 322 / 284×142 -->
+    <!-- 그룹커닝: 343,278 -->
     <div class="hp-kerning">
       <img src="image/그룹커닝.png" alt="그룹커닝" class="hp-img" />
     </div>
 
-    <!-- 타자기: 843,322/251×252 + 타자기2: 974,234/212×207 (종이 뽑힘) -->
+    <!-- 타자기: 631,514 / rotate:28deg -->
     <div class="hp-tajagi" id="hp-tajagi">
       <img src="image/타자기2.png" alt="종이" class="hp-tajagi-paper" />
       <img src="image/타자기.png" alt="타자기" class="hp-tajagi-base" />
     </div>
 
-    <!-- 학: 1532,125 / 244×257 -->
+    <!-- 학 (교체된 이미지): 1500,234 -->
     <div class="hp-hak">
       <img src="image/학.png" alt="학" class="hp-img" />
     </div>
@@ -48,12 +47,12 @@
       <img src="image/확장.png" alt="확장" class="hp-img" />
     </div>
 
-    <!-- 훈민정음: 811,789 / 220×194 -->
+    <!-- 훈민정음 책: 137,490 / rotate:-15deg -->
     <div class="hp-hunmin">
       <img src="image/훈민정음.png" alt="훈민정음" class="hp-img" />
     </div>
 
-    <!-- 조영제: 680,546 / 193×187 -->
+    <!-- 조영제/한글그리드: 990,385 / rotate:30deg -->
     <div class="hp-joyoungjae">
       <img src="image/조영제.png" alt="조영제" class="hp-img" />
     </div>
@@ -70,11 +69,17 @@
       <img src="image/멋지음안상수.png" alt="멋지음안상수" class="hp-img" />
     </div>
 
-    <!-- 한눈에 보기: 1557,66 -->
-    <button class="hp-nav-btn" id="hp-hanbun" style="left:81.1%;top:6.1%">한눈에 보기</button>
+    <!-- 벽돌 + 시작하기: 1416,756 -->
+    <div class="hp-brick-wrap">
+      <img src="image/벽돌.png" alt="벽돌" class="hp-brick-img" />
+      <button class="hp-sijakagi" id="hp-sijakagi">시작하기</button>
+    </div>
 
-    <!-- 멋지은 이들: 1709,66 -->
-    <button class="hp-nav-btn" id="hp-meotjieun" style="left:89%;top:6.1%">멋지은 이들</button>
+    <!-- 한눈에 보기: 1563,10 -->
+    <button class="hp-nav-btn" id="hp-hanbun">한눈에 보기</button>
+
+    <!-- 멋지은 이들: 1711,10 -->
+    <button class="hp-nav-btn" id="hp-meotjieun">멋지은 이들</button>
 
   </div>
 
@@ -340,6 +345,16 @@
 
   <!-- 메인 세부 페이지 — 긴 스크롤 콘텐츠 -->
   <div id="detail-main" class="detail-page">
+
+    <!-- 밧줄 -->
+    <div class="dm-rope-wrap" id="dm-rope-wrap">
+      <img src="image/밧줄.png" alt="밧줄" class="dm-rope" id="dm-rope" />
+    </div>
+
+    <!-- 밧줄 오버레이 -->
+    <div class="rope-overlay" id="rope-overlay">
+      <button class="rope-overlay-close" id="rope-overlay-close">✕</button>
+    </div>
 
     <!-- 고정 헤더 -->
     <div class="dm-header" id="dm-header">
@@ -1141,6 +1156,10 @@
     ================================================================ */
     document.getElementById('hp-project').addEventListener('click', function () {
       openDetailMain('sec-aproject');
+    });
+
+    document.getElementById('hp-sijakagi').addEventListener('click', function () {
+      openDetailMain('sec-birth');
     });
 
     document.querySelector('.hp-kerning').addEventListener('click', function () {
@@ -2331,6 +2350,86 @@
 
     update();
     dmScroll.addEventListener('scroll', update, { passive: true });
+  })();
+
+  /* ── 밧줄 드래그 → 오버레이 ── */
+  (function() {
+    var wrap    = document.getElementById('dm-rope-wrap');
+    var rope    = document.getElementById('dm-rope');
+    var overlay = document.getElementById('rope-overlay');
+    var closeBtn = document.getElementById('rope-overlay-close');
+    if (!wrap || !rope || !overlay) return;
+
+    var THRESHOLD = 130;
+    var MAX_DRAG  = 220;
+    var dragging  = false;
+    var startY    = 0;
+    var delta     = 0;
+    var moved     = false;
+
+    function openOverlay() {
+      overlay.style.display = 'block';
+      overlay.style.transition = 'opacity 0.3s ease';
+      overlay.style.opacity = '1';
+      overlay.classList.add('is-open');
+      wrap.style.pointerEvents = 'none';
+      wrap.style.zIndex = '0';
+    }
+
+    function closeOverlay() {
+      overlay.classList.remove('is-open');
+      overlay.style.transition = 'opacity 0.3s ease';
+      overlay.style.opacity = '0';
+      wrap.classList.add('has-seen');
+      wrap.style.pointerEvents = '';
+      wrap.style.zIndex = '';
+      setTimeout(function() {
+        overlay.style.display = 'none';
+        overlay.style.opacity = '';
+      }, 300);
+    }
+
+    wrap.addEventListener('pointerdown', function(e) {
+      dragging = true;
+      moved = false;
+      startY = e.clientY;
+      delta = 0;
+      wrap.classList.add('is-dragging');
+      wrap.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+
+    wrap.addEventListener('pointermove', function(e) {
+      if (!dragging) return;
+      delta = Math.min(Math.max(0, e.clientY - startY), MAX_DRAG);
+      if (delta > 5) moved = true;
+      rope.style.transform = 'translateY(' + delta + 'px)';
+      overlay.style.display = 'block';
+      overlay.style.transition = 'none';
+      overlay.style.opacity = Math.min(delta / THRESHOLD, 1);
+    });
+
+    wrap.addEventListener('pointerup', function() {
+      if (!dragging) return;
+      dragging = false;
+      wrap.classList.remove('is-dragging');
+      rope.style.transform = '';
+      if (!moved || delta >= THRESHOLD) {
+        openOverlay();
+      } else {
+        overlay.style.transition = 'opacity 0.2s ease';
+        overlay.style.opacity = '0';
+        setTimeout(function() {
+          overlay.style.display = 'none';
+          overlay.style.opacity = '';
+        }, 200);
+      }
+      delta = 0;
+      moved = false;
+    });
+
+    overlay.addEventListener('click', closeOverlay);
+    closeBtn.addEventListener('click', function(e) { e.stopPropagation(); closeOverlay(); });
   })();
   </script>
 
