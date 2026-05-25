@@ -3809,24 +3809,28 @@ html, body {
   position: relative;
   z-index: 1;
   margin: 0 0 clamp(14px, 1.5vw, 28px) 0;
-  padding: 0.1em 0.4em;
-  background: rgba(152, 251, 152, 0.55);
-  border-radius: 4px;
 }
 
-/* 인트로 본문 오버라이드 (weight 700, 형광펜 전체 배경) */
+/* 인트로 본문 오버라이드 */
 .dm-intro-body {
   font-weight: 700;
   position: relative;
   z-index: 1;
-  background: rgba(152, 251, 152, 0.45);
-  padding: 0.4em 0.7em;
-  border-radius: 4px;
+}
+
+/* 라인마다 따라붙는 형광펜 (box-decoration-break: clone) */
+.dm-hl-line {
+  display: inline;
+  background: rgba(152, 251, 152, 0.55);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0.12em 0.35em;
+  border-radius: 3px;
 }
 
 /* 각주 연결 단어 형광펜 (더 진하게) */
 .dm-hl {
-  background: rgba(152, 251, 152, 0.75);
+  background: rgba(152, 251, 152, 0.8);
   border-radius: 2px;
   padding: 0 2px;
 }
