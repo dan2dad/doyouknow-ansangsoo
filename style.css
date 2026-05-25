@@ -3736,36 +3736,51 @@ html, body {
   width: 100%;
   position: relative;
 }
-.dm-section--hero {
-  overflow: hidden;
-  justify-content: flex-end;
-  padding-bottom: 7vh;
-}
+.dm-section--hero { overflow: hidden; }
 .dm-section--intro { overflow: visible; }
 .dm-section--form { align-items: center; }
 
-/* 히어로: 단일 이미지 (절대 위치) */
-.dm-hero-single {
-  position: absolute;
-  width: clamp(300px, 38.1vw, 732px);
-  height: auto;
-  left: 30.9vw;
-  top: 26vh;
-  pointer-events: none;
+/* 히어로 이미지 행 */
+.dm-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  margin-top: 0;
+  overflow-x: auto;
+  overflow-y: visible;
+  cursor: pointer;
+  padding: 0 calc(50vw - 366px);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.dm-hero::-webkit-scrollbar { display: none; }
+.dm-hero.is-grabbing { cursor: grabbing; }
+
+.dm-hero-img {
+  width: 731.98px;
+  height: 513.85px;
+  flex-shrink: 0;
+  object-fit: cover;
+  display: block;
   user-select: none;
   -webkit-user-drag: none;
-  object-fit: cover;
+  pointer-events: none;
+  scroll-snap-align: center;
+  border: 2px solid black;
+  box-sizing: border-box;
 }
 
-/* 히어로 라벨 */
+/* 라벨 */
 .dm-label {
   color: black;
   font-size: clamp(28px, 3.125vw, 60px);
   font-family: AGahnsangsoo2012, sans-serif;
-  font-weight: 500;
+  font-weight: 200;
   line-height: 1.1;
-  margin: 0 0 0 42.3vw;
-  text-align: left;
+  margin: 1.7vw 0 0 0;
+  text-align: center;
 }
 
 /* 인트로: 대형 기울어진 이미지 */
