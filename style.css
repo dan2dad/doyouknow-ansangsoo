@@ -4024,14 +4024,18 @@ html, body {
 .dm-section--hunmin {
   height: 100vh;
   align-items: center;
-  padding: 12vh 0;
-  gap: clamp(32px, 4vh, 56px);
+  justify-content: space-between;
+  padding: 18vh 0 12vh;
   overflow: hidden;
 }
 
 .hm-title {
   margin: 0;
   font-size: clamp(40px, 5vw, 96px);
+}
+
+.dm-section--hunmin .dm-body {
+  max-width: clamp(280px, 36vw, 692px);
 }
 
 
