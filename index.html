@@ -457,19 +457,42 @@
         </div>
       </div>
 
-      <div class="dm-section dm-section--hunmin2">
-        <div class="hm-charts-wrap">
-          <div class="hm-chart hm-chart--chot">
-            <img src="image/첫닿자.svg" alt="첫닿자 19자" class="hm-chart-img" />
+      <div class="dm-section dm-section--hunmin2-new">
+        <img src="image/조형특징1.svg" alt="조형특징1" class="hm2-new-img" />
+        <p class="dm-body hm2-new-text">안상수체는 첫 닿자와 받침의 형태를 같이 쓰고, 홀자의 위치를 가운데로 맞추어 아주 단순한 구조로 글자체를 설계했고,</p>
+      </div>
+
+      <div class="dm-section dm-section--hunmin3">
+        <div class="hm3-charts-wrap">
+          <div class="hm3-chart hm3-chart--chot">
+            <div class="hm3-chart-box">
+              <img src="image/첫닿자.svg" alt="첫닿자 19자" class="hm3-chart-img" />
+            </div>
           </div>
-          <div class="hm-chart hm-chart--bat">
-            <img src="image/받침.svg" alt="받침 21자" class="hm-chart-img" />
+          <div class="hm3-chart hm3-chart--bat">
+            <div class="hm3-chart-box">
+              <img src="image/받침.svg" alt="받침 21자" class="hm3-chart-img" />
+            </div>
           </div>
-          <div class="hm-chart hm-chart--hol">
-            <img src="image/홀자.svg" alt="홀자 21자" class="hm-chart-img" />
+          <div class="hm3-chart hm3-chart--hol">
+            <div class="hm3-chart-box">
+              <img src="image/홀자.svg" alt="홀자 21자" class="hm3-chart-img" />
+            </div>
           </div>
         </div>
-        <p class="dm-body">안상수체는 첫 닿자와 받침의 형태를 같이 쓰고, 홀자의 위치를 가운데로 맞추어 아주 단순한 구조로 글자체를 설계했고, 첫닿자 19자, 홀자 21자, 받침 27자를 조합하는 방식으로 손쉽게 11,172자를 만들어냈다. <span class="dm-highlight">이는 네모틀 글자체에서 글자마다 형태, 크기, 위치를 변형하여 11,172자를 각각 설계해야 했던 관습에서 벗어난 새롭고도 익숙한 접근이었다.</span></p>
+        <p class="dm-body hm3-text">
+          첫닿자 19자, 홀자 21자, 받침 27자를 조합하는 방식으로 손쉽게 11,172자를 만들어냈다. 
+          <span class="hm3-highlight">이는 네모틀 글자체에서 글자마다 형태, 크기, 위치를 변형하여 11,172자를 각각 설계해야 했던 관습에서 벗어난 새롭고도 익숙한 접근이었다.</span>
+        </p>
+      </div>
+
+      <!-- 섹션 4b-4: 확장성 텍스트 -->
+      <div class="dm-section dm-section--story dm-section--story-2">
+        <div class="dm-story-text">
+          <p class="story-paragraph is-visible">시각 디자인 영역에서의 하나의 결과물이 오랫동안 쓰이는 범위는 매우 한정적이다. 1985년 발표한 안상수체는 30여년동안 다양한 방법으로 확장을 시도했다. 이 확장은 만든 이의 다양한 실험 속에서 지속되었고, 나아가 일상으로 파고들어 다양한 가능성을 열기도 했다.</p>
+          <br>
+          <p class="story-paragraph is-visible">안상수체의 확장성 - 노민지</p>
+        </div>
       </div>
 
       <!-- 섹션 5a: 조형적 특징 인트로 -->
@@ -2700,6 +2723,23 @@
         currentIndex++;
       }
     });
+  })();
+
+  /* ── 훈민정음3 형광펜 애니메이션 ── */
+  (function() {
+    var hm3Section = document.querySelector('.dm-section--hunmin3');
+    var highlight = document.querySelector('.hm3-highlight');
+    if (!hm3Section || !highlight) return;
+    
+    var observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        highlight.classList.add('is-drawn');
+      } else {
+        highlight.classList.remove('is-drawn');
+      }
+    }, { threshold: 0.5 });
+    
+    observer.observe(hm3Section);
   })();
   </script>
 

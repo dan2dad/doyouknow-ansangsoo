@@ -4172,43 +4172,123 @@ html, body {
   word-break: keep-all;
 }
 
-.dm-section--hunmin2 {
+.dm-section--hunmin2-new {
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5%;
+  gap: 3vw;
+}
+
+.hm2-new-img {
+  width: 90%;
+  max-width: 832px;
+  height: auto;
+}
+
+.hm2-new-text {
+  max-width: 692px;
+  text-align: center;
+  font-family: 'OnulHanChe', sans-serif;
+  font-size: clamp(16px, 1.8vw, 24px);
+  font-weight: 500;
+  line-height: 1.7;
+  word-break: keep-all;
+  margin: 0;
+}
+
+/* 섹션 4b-3: 훈민정음 3 (차트 3개 깜빡임) */
+.dm-section--hunmin3 {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 10vh 0;
   gap: clamp(32px, 5vh, 64px);
   overflow: hidden;
 }
 
-.hm-charts-wrap {
+.hm3-charts-wrap {
   position: relative;
   width: clamp(320px, 70vw, 1344px);
   height: clamp(240px, 34vw, 660px);
 }
 
-.hm-chart {
+.hm3-chart {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.hm-chart-img {
-  width: clamp(120px, 18vw, 360px);
+.hm3-chart-title {
+  font-family: 'OnulHanChe', sans-serif;
+  font-size: clamp(12px, 1.2vw, 16px);
+  font-weight: 500;
+  color: black;
+  margin: 0;
+}
+
+.hm3-chart-box {
+  position: relative;
+  display: inline-flex;
+}
+
+.hm3-chart-box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #98FB98;
+  z-index: -1;
+  opacity: 0;
+  animation: hm3-box-flash 12s infinite;
+}
+
+.hm3-chart-img {
+  width: clamp(160px, 24vw, 400px);
   height: auto;
   display: block;
 }
 
-.hm-chart--chot { left: 18%;  top: 16%; }
-.hm-chart--bat  { right: 18%; top: 0;   }
-.hm-chart--hol  { left: 34%;  top: 56%; }
+.hm3-chart--chot { left: 10%;  top: 10%; }
+.hm3-chart--bat  { right: 10%; top: 0;   }
+.hm3-chart--hol  { left: 34%;  top: 56%; }
 
-.hm-img-caption {
-  text-align: right;
-  color: #8B8B8B;
-  font-size: clamp(11px, 0.85vw, 15px);
-  font-family: OnulHanChe, sans-serif;
-  font-weight: 700;
-  line-height: 1.6;
-  margin: 6px 0 0 0;
-  width: 100%;
+.hm3-chart--chot .hm3-chart-box::before { top: 24.8%; animation-delay: 0s; }
+.hm3-chart--hol .hm3-chart-box::before  { top: 24%;   animation-delay: 4s; }
+.hm3-chart--bat .hm3-chart-box::before  { top: 19.9%; animation-delay: 8s; }
+
+@keyframes hm3-box-flash {
+  0%, 15%, 45%, 100% { opacity: 0; }
+  20%, 40% { opacity: 1; }
+}
+
+.hm3-text {
+  max-width: 692px;
+  text-align: center;
+  font-family: 'OnulHanChe', sans-serif;
+  font-size: clamp(16px, 1.8vw, 24px);
+  font-weight: 500;
+  line-height: 1.7;
+  word-break: keep-all;
+  margin: 0;
+}
+
+.hm3-highlight {
+  display: inline;
+  background-image: linear-gradient(#98FB98, #98FB98);
+  background-repeat: no-repeat;
+  background-size: 0% 0.5em;
+  background-position: 0 88%;
+  transition: background-size 1.2s ease-out;
+}
+
+.hm3-highlight.is-drawn {
+  background-size: 100% 0.5em;
 }
 
 /* 마지막 문장 */
@@ -4562,6 +4642,11 @@ html, body {
   cursor: pointer;
   user-select: none;
   height: 100vh;
+}
+
+.dm-section--story-2 {
+  cursor: default;
+  user-select: text;
 }
 
 .dm-story-text {
