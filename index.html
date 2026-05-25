@@ -379,32 +379,12 @@
     <!-- 스크롤 콘텐츠 -->
     <div class="dm-scroll">
 
-      <!-- 섹션 0: 오프닝 스토리 (클릭 시 한 문장씩 등장) -->
+      <!-- 섹션 0: 오프닝 스토리 (클릭 시 한 문단씩 등장) -->
       <div class="dm-section dm-section--story" id="dm-story">
         <div class="dm-story-text" id="dm-story-text">
-          <span class="story-sentence">안상수체를 알고 있나요? </span>
-          <span class="story-sentence">정확한 이름은 몰랐어도, 본 적은 있을 거에요. </span>
-          <span class="story-sentence">간판에서, 안내판에서, 컴퓨터 화면 어딘가에서. </span>
-          <span class="story-sentence">40년 동안 우리 곁에 있었으니까요. </span>
-          <div class="story-spacer"></div>
-          
-          <!-- 문단 위치에 정확히 오되, 글씨가 점프하지 않게 높이 0 컨테이너로 감쌈 -->
-          <div class="story-flow-wrapper">
-            <img src="image/안체1.jpg" id="story-img-1" class="story-flow-img" alt="간판 안내판 예시">
-          </div>
-
-          <span class="story-sentence">긴 시간 동안, 안상수체는 끊임없이 변화하고, 확장하고, 쌓여왔습니다. </span>
-          <span class="story-sentence">막내 돼지의 벽돌집처럼, 바람이 불어도 무너지지 않을 집을 지었습니다. </span>
-          <span class="story-sentence">정형화 되지 않은 형태의 구옥이 어느날 눈에 들어오듯, 고유의 멋과 견고함을 지니고 있죠. </span>
-          <div class="story-spacer"></div>
-          
-          <!-- 문단 위치에 정확히 오되, 글씨가 점프하지 않게 높이 0 컨테이너로 감쌈 -->
-          <div class="story-flow-wrapper">
-            <img src="image/아기돼지삼형제.webp" id="story-img-pig" class="story-flow-img" style="top: -15vh;" alt="아기돼지 삼형제">
-          </div>
-
-          <span class="story-sentence">이 웹페이지는 기리고 싶은 마음에 제작된 것입니다. </span><br>
-          <span class="story-sentence">우리는 안체가 쌓아온 벽돌들을 하나하나 이야기 해보고 싶습니다...<img src="image/벽돌.png" class="story-brick-dot" alt="벽돌"></span>
+          <p class="story-paragraph">안상수체를 알고 있나요? 정확한 이름은 몰랐어도, 본 적은 있을 거에요. 간판에서, 안내판에서, 컴퓨터 화면 어딘가에서. 40년 동안 우리 곁에 있었으니까요.</p>
+          <p class="story-paragraph">긴 시간 동안, 안상수체는 끊임없이 변화하고, 확장하고, 쌓여왔습니다. 막내 돼지의 벽돌집처럼, 바람이 불어도 무너지지 않을 집을 지었습니다. 정형화 되지 않은 형태의 구옥이 어느날 눈에 들어오듯, 고유의 멋과 견고함을 지니고 있죠.</p>
+          <p class="story-paragraph">이 웹페이지는 기리고 싶은 마음에 제작된 것입니다.<br>우리는 안체가 쌓아온 벽돌들을 하나하나 이야기 해보고 싶습니다...<img src="image/벽돌.png" class="story-brick-dot" alt="벽돌"></p>
         </div>
       </div>
 
@@ -2557,47 +2537,25 @@
     });
   })();
 
-  /* ── 오프닝 스토리 클릭 시 한 문장씩 등장 + 이미지 연동 ── */
+  /* ── 오프닝 스토리 클릭 시 한 문단씩 등장 ── */
   (function() {
     var storySection = document.getElementById('dm-story');
     if (!storySection) return;
-    
-    var sentences = storySection.querySelectorAll('.story-sentence');
-    var img1 = document.getElementById('story-img-1');
-    var imgPig = document.getElementById('story-img-pig');
+
+    var paragraphs = storySection.querySelectorAll('.story-paragraph');
     var currentIndex = 0;
-    
-    // 처음에 첫 번째 문장은 보이게 설정
-    if (sentences.length > 0) {
-      sentences[0].classList.add('is-visible');
+
+    if (paragraphs.length > 0) {
+      paragraphs[0].classList.add('is-visible');
       currentIndex = 1;
     }
-    
+
     storySection.addEventListener('click', function(e) {
-      if (currentIndex < sentences.length) {
-        e.stopPropagation(); // 문장이 남았을 때는 화면 스크롤 방지
-        sentences[currentIndex].classList.add('is-visible');
-        
-        // 특정 문장(인덱스)일 때 이미지 띄우기
-        // currentIndex는 방금 추가된 문장의 인덱스임
-        
-        // "간판에서..." (인덱스 2) 나올 때 이미지1 표시, 다음(인덱스 3)에 숨김
-        if (currentIndex === 2) {
-          if(img1) img1.classList.add('is-visible');
-        } else {
-          if(img1) img1.classList.remove('is-visible');
-        }
-        
-        // "막내 돼지의..." (인덱스 5) 나올 때 돼지 이미지 표시, 다음(인덱스 6)에 숨김
-        if (currentIndex === 5) {
-          if(imgPig) imgPig.classList.add('is-visible');
-        } else {
-          if(imgPig) imgPig.classList.remove('is-visible');
-        }
-        
+      if (currentIndex < paragraphs.length) {
+        e.stopPropagation();
+        paragraphs[currentIndex].classList.add('is-visible');
         currentIndex++;
       }
-      // 문장이 다 나오면 stopPropagation을 하지 않으므로, 부모(dmScroll)의 다음 섹션 스크롤 기능이 자연스럽게 작동함
     });
   })();
   </script>
