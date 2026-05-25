@@ -2494,7 +2494,7 @@ html, body {
 
 .ag-form-title {
   font-family: var(--font-ahn);
-  font-size: clamp(36px, 3.65vw, 70px);
+  font-size: clamp(40px, 5vw, 96px);
   font-weight: 700;
   color: #000;
   line-height: 1.1;
@@ -2505,8 +2505,8 @@ html, body {
 
 .ag-form-desc {
   font-family: var(--font-onul);
-  font-size: clamp(12px, 1.01vw, 20px);
-  font-weight: 700;
+  font-size: clamp(14px, 1.25vw, 24px);
+  font-weight: 500;
   line-height: 1.7;
   color: #000;
   max-width: clamp(300px, 40.2vw, 772px);
@@ -3736,51 +3736,62 @@ html, body {
   width: 100%;
   position: relative;
 }
-.dm-section--hero { overflow: hidden; }
+.dm-section--hero {
+  overflow: hidden;
+  justify-content: flex-end;
+  padding-bottom: 7vh;
+}
 .dm-section--intro { overflow: visible; }
 .dm-section--form { align-items: center; }
 
-/* 히어로 이미지 행 */
-.dm-hero {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  width: 100%;
-  margin-top: 0;
-  overflow-x: auto;
-  overflow-y: visible;
-  cursor: pointer;
-  padding: 0 calc(50vw - 366px);
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  scroll-snap-type: x mandatory;
-}
-.dm-hero::-webkit-scrollbar { display: none; }
-.dm-hero.is-grabbing { cursor: grabbing; }
-
-.dm-hero-img {
-  width: 731.98px;
-  height: 513.85px;
-  flex-shrink: 0;
-  object-fit: cover;
-  display: block;
+/* 히어로: 단일 이미지 (절대 위치) */
+.dm-hero-single {
+  position: absolute;
+  width: clamp(300px, 38.1vw, 732px);
+  height: auto;
+  left: 30.9vw;
+  top: 26vh;
+  pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
-  pointer-events: none;
-  scroll-snap-align: center;
-  border: 2px solid black;
-  box-sizing: border-box;
+  object-fit: cover;
 }
 
-/* 라이트 라벨 */
+/* 히어로 라벨 */
 .dm-label {
   color: black;
   font-size: clamp(28px, 3.125vw, 60px);
   font-family: AGahnsangsoo2012, sans-serif;
-  font-weight: 200;
+  font-weight: 500;
   line-height: 1.1;
-  margin: 1.7vw 0 0 0;
-  text-align: center;
+  margin: 0 0 0 42.3vw;
+  text-align: left;
+}
+
+/* 인트로: 대형 기울어진 이미지 */
+.dm-ref-big {
+  position: absolute;
+  width: clamp(400px, 61.5vw, 1181px);
+  height: auto;
+  left: 13.2vw;
+  top: 29.4vh;
+  transform: rotate(-15deg);
+  transform-origin: top left;
+  pointer-events: none;
+  user-select: none;
+}
+
+.dm-ref-caption--float {
+  position: absolute;
+  left: 58.2vw;
+  top: 87.9vh;
+  transform: rotate(-13deg);
+  transform-origin: top left;
+  color: #8B8B8B;
+  font-size: clamp(11px, 0.78vw, 15px);
+  font-family: var(--font-onul);
+  font-weight: 700;
+  line-height: 1.6;
 }
 
 /* 볼드 타이틀 */
@@ -3837,9 +3848,9 @@ html, body {
   max-width: clamp(300px, 40.2vw, 772px);
   margin: 0 auto;
   color: black;
-  font-size: clamp(12px, 1.01vw, 20px);
+  font-size: clamp(14px, 1.25vw, 24px);
   font-family: var(--font-onul);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.7;
   text-align: center;
 }
@@ -3959,6 +3970,7 @@ html, body {
 
 .hm-title {
   margin: 0;
+  font-size: clamp(40px, 5vw, 96px);
 }
 
 
