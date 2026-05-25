@@ -3550,9 +3550,72 @@ html, body {
 
 .rope-screen-wash {
   position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.50);
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.1);
   pointer-events: none;
+}
+
+/* ── 1984 개발 과정 오버레이 내부 컨텐츠 ── */
+.dev1984-overlay-content {
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 10;
+  /* 클릭 방해 금지 */
+}
+
+.dev1984-overlay-title {
+  font-family: AGahnsangsoo2012, var(--font-ahn);
+  font-size: clamp(48px, 6vw, 96px);
+  font-weight: 700;
+  color: black;
+  margin-bottom: 2vh;
+  text-align: center;
+}
+
+.dev1984-overlay-img-wrap {
+  width: 625px;
+  max-width: 90vw;
+  aspect-ratio: 625 / 604;
+  background: #FEFEFE;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3vh;
+}
+
+.dev1984-overlay-img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
+
+.dev1984-overlay-text-box {
+  width: 800px;
+  max-width: 90vw;
+  text-align: center;
+  font-family: OnulHanChe, sans-serif;
+  color: black;
+  line-height: 1.7;
+}
+
+.dev1984-step-title {
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.dev1984-step-desc {
+  font-size: clamp(14px, 1.8vw, 20px);
+  font-weight: 500;
+  word-break: keep-all;
 }
 
 /* 콘텐츠 박스 */
@@ -4053,6 +4116,62 @@ html, body {
   will-change: transform;
 }
 
+/* ─── 7쪽: 안상수체 1984 개발 과정 ─── */
+.dm-section--dev1984 {
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5%;
+}
+
+.dev1984-title {
+  margin-bottom: 4vh;
+  text-align: center;
+}
+
+.dev1984-img-wrap {
+  position: relative;
+  width: 625px;
+  max-width: 90vw;
+  aspect-ratio: 625 / 604;
+  background: #FEFEFE;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dev1984-img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
+
+.dev1984-highlight {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  background: #98FB98;
+  width: 879px;
+  max-width: 140vw; /* 모바일 대응 */
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 10;
+}
+
+.dev1984-highlight p {
+  font-family: OnulHanChe, sans-serif;
+  font-size: clamp(14px, 2vw, 24px);
+  font-weight: 500;
+  line-height: 1.7;
+  color: black;
+  margin: 0;
+  word-break: keep-all;
+}
+
 .dm-section--hunmin2 {
   height: 100vh;
   align-items: center;
@@ -4298,8 +4417,8 @@ html, body {
 /* ─── 큰 인용 섹션 ─── */
 .dm-section--bigquote {
   position: relative;
-  justify-content: center;
-  padding: 0 clamp(24px, 6vw, 115px);
+  justify-content: flex-start;
+  padding: 18vh clamp(24px, 6vw, 115px) 0;
 }
 
 .dm-bigquote {
@@ -4324,6 +4443,17 @@ html, body {
 .bq-brick {
   width: clamp(100px, 14vw, 260px);
   display: block;
+}
+
+.bq-brick:nth-child(1) {
+  position: relative;
+  z-index: 2;
+}
+
+.bq-brick:nth-child(2) {
+  position: relative;
+  margin-top: -58%;
+  z-index: 1;
 }
 
 /* ─── 조형적 특징 섹션 ─── */
@@ -4463,11 +4593,11 @@ html, body {
 /* 마지막 문장 등장과 함께 나오는 거대 벽돌 */
 .story-brick-dot {
   position: absolute;
-  right: 5%; /* 우측 끝에서 살짝 안쪽 */
+  right: 1%; /* 좀 더 우측으로 이동 */
   bottom: 0; /* 이야기해보고 싶습니다 우측 빈 공간 */
   width: clamp(150px, 15vw, 300px); /* 기존 점 크기의 약 7배 이상 큼직하게 */
   height: auto;
-  transform: rotate(20deg); /* 대각선 기울기 */
+  transform: rotate(-10deg); /* 왼쪽이 조금 덜 기울어지도록 완화 */
   pointer-events: none;
 }
 

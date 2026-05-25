@@ -441,7 +441,22 @@
         <p class="dm-body">안상수체의 간결함은 훈민정음 창제 원리에 근거한다. 훈민정음은 닿자와 홀자 24개만 설계해 형태를 변형하지 않고 모든 경우에 사용하는 가장 간결하고 기하학적인 형태이다. 수직선, 수평선, 사선, 정원으로 구성된 24자의 낱자를 기본 형태로 삼아 쌍닿자, 이중홀자 등을 조합했다.</p>
       </div>
 
-      <!-- 섹션 4b: 조합 방식 -->
+      <!-- 섹션 4b: 조합 방식 (기존 7쪽이었으나 8쪽으로 밀림) -->
+      <!-- 새로 추가되는 7쪽: 안상수체 1984 개발 과정 -->
+      <div class="dm-section dm-section--dev1984" id="sec-new7">
+        <h2 class="dm-title dev1984-title">안상수체 1984 개발 과정</h2>
+        
+        <div class="dev1984-img-wrap">
+          <!-- '학' 도면 이미지 -->
+          <img src="image/학.svg" alt="학 도면" class="dev1984-img" />
+          
+          <!-- 녹색 형광펜 박스 (회전) -->
+          <div class="dev1984-highlight">
+            <p>“당시 오토캐드는 기계 제도 및 건축 설계용으로만 쓰였으나, 이를 잘 이용하면<br>글자 디자인에 매우 도움이 되겠다 싶어 매뉴얼을 구해 체득해나갔다.”</p>
+          </div>
+        </div>
+      </div>
+
       <div class="dm-section dm-section--hunmin2">
         <div class="hm-charts-wrap">
           <div class="hm-chart hm-chart--chot">
@@ -567,6 +582,28 @@
     </div>
 
     <button class="rope-overlay-close" id="rope-overlay-close">✕</button>
+  </div>
+
+  <!-- 밧줄 오버레이 2 (7쪽 전용) -->
+  <div class="rope-overlay" id="rope-overlay-2">
+    <!-- 배경 (흰색 반투명) -->
+    <div class="rope-screen-wash" style="background: rgba(255,255,255,0.95);"></div>
+
+    <!-- 내용물 컨테이너 -->
+    <div class="dev1984-overlay-content" id="dev1984-overlay-clicker" style="cursor: pointer;">
+      <h2 class="dev1984-overlay-title">어떻게.만들었는가.</h2>
+      
+      <div class="dev1984-overlay-img-wrap">
+        <img src="image/학.svg" alt="학 도면" class="dev1984-overlay-img" />
+      </div>
+
+      <div class="dev1984-overlay-text-box">
+        <div class="dev1984-step-title" id="dev1984-step-title">1. 프레임 만들기</div>
+        <div class="dev1984-step-desc" id="dev1984-step-desc">모듈 골격을 추출해 설계도로 삼고, 첫닿자∙홀자∙받침의 위치와 쪽자 삽입지점∙선 굵기를 수치로 고정했다.</div>
+      </div>
+    </div>
+    
+    <button class="rope-overlay-close" id="rope-overlay-close-2">✕</button>
   </div>
 
   <!-- 안체프로젝트 세부 페이지 2 — 나만의 안체 만들기 -->
@@ -2186,6 +2223,7 @@
 
     tjBack.addEventListener('click', closeTajagi);
 
+
     /* ── 모바일 입력 ── */
     var tjMobileInput = document.getElementById('tj-mobile-input');
     var isMobile = ('ontouchstart' in window);
@@ -2388,6 +2426,7 @@
     var clipRect  = document.getElementById('dm-clip-rect');
     var rightD    = document.getElementById('dm-right-d');
     var ropeWrap  = document.getElementById('dm-rope-wrap');
+    var lastRopePage = -1;
 
     function update() {
       var max = dmScroll.scrollHeight - dmScroll.clientHeight;
@@ -2405,11 +2444,28 @@
             currentIdx = i;
           }
         }
-        // 섹션 2 (0-base) = 3번 페이지에서만 표시, 나머지 숨김
-        if (currentIdx === 2) {
+        
+        // 섹션 2 (0-base) = 3번 페이지, 섹션 6 = 7번 페이지에서 표시
+        if (currentIdx === 2 || currentIdx === 6) {
+          if (lastRopePage !== currentIdx) {
+            // 다른 밧줄 페이지로 진입 시 밧줄을 새것처럼 초기화
+            ropeWrap.classList.remove('has-seen');
+            ropeWrap.style.animation = '';
+            ropeWrap.style.transition = '';
+            ropeWrap.style.transform = '';
+            
+            // 열려있던 오버레이가 있다면 원상복구
+            var ov1 = document.getElementById('rope-overlay');
+            var ov2 = document.getElementById('rope-overlay-2');
+            if (ov1) { ov1.style.transform = 'translateY(-100%)'; ov1.style.pointerEvents = 'none'; }
+            if (ov2) { ov2.style.transform = 'translateY(-100%)'; ov2.style.pointerEvents = 'none'; }
+            
+            lastRopePage = currentIdx;
+          }
           ropeWrap.classList.remove('fade-out');
         } else {
           ropeWrap.classList.add('fade-out');
+          lastRopePage = -1; // 밧줄 영역을 벗어나면 상태 초기화
         }
       }
     }
@@ -2420,17 +2476,20 @@
 
   /* ── 밧줄 + 패널 동기 인터랙션 ── */
   (function() {
-    var wrap     = document.getElementById('dm-rope-wrap');
-    var rope     = document.getElementById('dm-rope');
-    var overlay  = document.getElementById('rope-overlay');
-    var closeBtn = document.getElementById('rope-overlay-close');
-    if (!wrap || !rope || !overlay) return;
+    var wrap      = document.getElementById('dm-rope-wrap');
+    var rope      = document.getElementById('dm-rope');
+    var overlay1  = document.getElementById('rope-overlay');
+    var overlay2  = document.getElementById('rope-overlay-2');
+    var closeBtn1 = document.getElementById('rope-overlay-close');
+    var closeBtn2 = document.getElementById('rope-overlay-close-2');
+    if (!wrap || !rope || !overlay1) return;
 
     var THRESHOLD = 50;
     var dragging  = false;
     var startY    = 0;
     var delta     = 0;
     var isOpen    = false;
+    var activeOverlay = overlay1;
 
     /* 밧줄 이미지 실제 높이 */
     function ropeH() { return rope.offsetHeight || 465; }
@@ -2442,12 +2501,11 @@
     /* 열기: 오버레이 내려옴 / 밧줄은 오버레이 바닥에 달려 화면 아래로 숨어버림 */
     function openOverlay() {
       isOpen = true;
-      /* CSS rope-pull 애니메이션이 JS transform을 방해하지 못하도록 즉시 정지 */
       wrap.classList.add('has-seen');
       wrap.style.animation        = 'none';
-      overlay.style.transition    = 'transform 1.6s cubic-bezier(0.5,0,0.15,1)';
-      overlay.style.transform     = 'translateY(0)';
-      overlay.style.pointerEvents = 'auto';
+      activeOverlay.style.transition    = 'transform 1.6s cubic-bezier(0.5,0,0.15,1)';
+      activeOverlay.style.transform     = 'translateY(0)';
+      activeOverlay.style.pointerEvents = 'auto';
       wrap.style.transition       = 'transform 1.6s cubic-bezier(0.5,0,0.15,1)';
       wrap.style.transform        = 'translateY(' + (window.innerHeight + 40) + 'px)';
       wrap.style.pointerEvents    = 'none';
@@ -2457,16 +2515,14 @@
     /* 닫기: 오버레이 바닥이 밧줄 상단에 붙어 같이 올라옴 */
     function closeOverlay() {
       isOpen = false;
-      overlay.style.pointerEvents = 'none';
-      overlay.style.transition    = 'transform 0.7s cubic-bezier(0.4,0,0.2,1)';
-      overlay.style.transform     = 'translateY(-100%)';
-      /* 밧줄도 오버레이와 동일하게 window.innerHeight만큼 위로 → 바닥이 붙어 올라옴 */
+      activeOverlay.style.pointerEvents = 'none';
+      activeOverlay.style.transition    = 'transform 0.7s cubic-bezier(0.4,0,0.2,1)';
+      activeOverlay.style.transform     = 'translateY(-100%)';
       wrap.style.zIndex           = '125';
       wrap.style.transition       = 'transform 0.7s cubic-bezier(0.4,0,0.2,1)';
-      wrap.style.transform        = 'translateY(40px)';   /* (innerHeight+40) - innerHeight = 40 */
+      wrap.style.transform        = 'translateY(40px)';
       wrap.style.pointerEvents    = '';
       wrap.classList.add('has-seen');
-      /* 올라간 뒤 ropeRest() 위치로 자리잡기 */
       setTimeout(function() {
         wrap.style.transition = 'transform 0.35s ease';
         wrap.style.transform  = 'translateY(' + ropeRest() + 'px)';
@@ -2476,8 +2532,8 @@
 
     /* 충분히 안 당김 → 원위치 복귀 */
     function snapBack() {
-      overlay.style.transition = 'transform 0.4s ease';
-      overlay.style.transform  = 'translateY(-100%)';
+      activeOverlay.style.transition = 'transform 0.4s ease';
+      activeOverlay.style.transform  = 'translateY(-100%)';
       wrap.style.transition    = 'transform 0.4s ease';
       wrap.style.transform     = 'translateY(0)';
       wrap.style.zIndex        = '';
@@ -2489,13 +2545,30 @@
       dragging = true;
       startY   = e.clientY;
       delta    = 0;
+      
+      var dmScrollEl = document.querySelector('#detail-main .dm-scroll');
+      var currentIdx = 0;
+      if (dmScrollEl) {
+        var sections = dmScrollEl.querySelectorAll('.dm-section');
+        var scrollTop = dmScrollEl.scrollTop;
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].offsetTop <= scrollTop + window.innerHeight * 0.5) {
+            currentIdx = i;
+          }
+        }
+      }
+      if (currentIdx === 6) {
+        activeOverlay = overlay2;
+      } else {
+        activeOverlay = overlay1;
+      }
+
       wrap.classList.add('has-seen');
       wrap.style.animation     = 'none';
       wrap.style.transition    = 'none';
       wrap.style.transform     = 'translateY(0)';
-      overlay.style.transition = 'none';
-      /* 통일한 시작점: overlay 바닥 = 밧줄 top = -40px */
-      overlay.style.transform  = 'translateY(' + (-window.innerHeight - 40) + 'px)';
+      activeOverlay.style.transition = 'none';
+      activeOverlay.style.transform  = 'translateY(' + (-window.innerHeight - 40) + 'px)';
       wrap.style.zIndex        = '130';
       wrap.classList.add('is-dragging');
       wrap.setPointerCapture(e.pointerId);
@@ -2506,17 +2579,17 @@
       if (!dragging) return;
       var d = ropeDown();
       delta = Math.min(Math.max(0, e.clientY - startY), d * 1.1);
-      /* 밧줄 이동 */
       wrap.style.transform    = 'translateY(' + delta + 'px)';
-      /* 오버레이 바닥 = 밧줄 top: overlay_ty = delta - innerHeight - 40 */
-      overlay.style.transform = 'translateY(' + (delta - window.innerHeight - 40) + 'px)';
+      activeOverlay.style.transform = 'translateY(' + (delta - window.innerHeight - 40) + 'px)';
     });
 
-    wrap.addEventListener('pointerup', function() {
+    wrap.addEventListener('pointerup', function(e) {
       if (!dragging) return;
       dragging = false;
       wrap.classList.remove('is-dragging');
-      /* delta 10px 미만이면 클릭으로 판단 → 바로 열기 */
+      if (typeof wrap.releasePointerCapture === 'function') {
+        wrap.releasePointerCapture(e.pointerId);
+      }
       if (delta < 10 || delta >= THRESHOLD) {
         openOverlay();
       } else {
@@ -2534,18 +2607,66 @@
     });
 
     /* ── X 닫기 버튼 ── */
-    closeBtn.addEventListener('pointerdown', function(e) { e.stopPropagation(); });
-    closeBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      closeOverlay();
-    });
+    if (closeBtn1) {
+      closeBtn1.addEventListener('pointerdown', function(e) { e.stopPropagation(); });
+      closeBtn1.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeOverlay();
+      });
+    }
+    if (closeBtn2) {
+      closeBtn2.addEventListener('pointerdown', function(e) { e.stopPropagation(); });
+      closeBtn2.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeOverlay();
+      });
+    }
 
     /* ── 오버레이 클릭/탭 → 닫기 (X 버튼 클릭은 제외) ── */
-    overlay.addEventListener('click', function(e) {
-      if (e.target.closest('.rope-overlay-close')) return;
-      if (!isOpen) return;
-      closeOverlay();
-    });
+    if (overlay1) {
+      overlay1.addEventListener('click', function(e) {
+        if (e.target.closest('.rope-overlay-close')) return;
+        if (!isOpen) return;
+        closeOverlay();
+      });
+    }
+    
+    // overlay2 클릭 이벤트는 밑의 6단계 진행을 위해 따로 제어하므로 배경 닫기는 일단 막거나 조건부로 처리
+    // 닫기 버튼으로만 닫히도록 하거나 6단계가 끝나면 닫히도록.
+    
+    // 1984 6단계 클릭 로직
+    var dev1984Clicker = document.getElementById('dev1984-overlay-clicker');
+    if (dev1984Clicker && overlay2) {
+      var steps = [
+        { t: "1. 프레임 만들기", d: "모듈 골격을 추출해 설계도로 삼고, 첫닿자∙홀자∙받침의 위치와 쪽자 삽입지점∙선 굵기를 수치로 고정했다." },
+        { t: "2. 자형 요소의 분석", d: "44자(첫닿자 19, 홀자 14, 받침닿자 11)를 최소 단위로 설정하고, 블록 명령으로 조합해 자형을 구현했다." },
+        { t: "3. 직선의 처리", d: "처음에 솔리드 명령을 사용하여 그렸지만 오토캐드 2.6프로그램을 구한 뒤에는 모두 폴리라인으로 바꾸었다." },
+        { t: "4. 곡선의 처리", d: "면 채우기 기능이 없어 원호로 외곽선을 그린 뒤 라인 밀도를 높여 메궜다.<br>ㅇ,ㅅ은 해치 명령으로, 동그라미는 이후 폴리라인으로 처리했다." },
+        { t: "5. 글자의 조합", d: "쪽자를 블록으로 저장해 불러내 조합하고, 완성된 낱글자도 블록으로 저장했다.<br>삽입지점을 지정해 글자 간격이 균일하게 맞도록 했다." },
+        { t: "6. 하드카피", d: "롤란드 DXY 880 플로터로 출력했으나 품질이 고르지 않아 수성 사인펜으로 일일이 수작업 수정했다." }
+      ];
+      var stepIdx = 0;
+      var titleEl = document.getElementById('dev1984-step-title');
+      var descEl = document.getElementById('dev1984-step-desc');
+      
+      dev1984Clicker.addEventListener('click', function(e) {
+        if (e.target.closest('.rope-overlay-close')) return;
+        stepIdx++;
+        if (stepIdx >= steps.length) {
+          // 6번째에서 한 번 더 누르면 창 닫기!
+          closeOverlay();
+          // 다음 번에 다시 열 때를 위해 초기화
+          setTimeout(function() {
+            stepIdx = 0;
+            titleEl.textContent = steps[stepIdx].t;
+            descEl.innerHTML = steps[stepIdx].d;
+          }, 1000);
+        } else {
+          titleEl.textContent = steps[stepIdx].t;
+          descEl.innerHTML = steps[stepIdx].d;
+        }
+      });
+    }
   })();
 
   /* ── 인트로 이미지 클릭: 텍스트 토글 ── */
