@@ -3837,11 +3837,9 @@ html, body {
   border-radius: 2px;
 }
 
-/* 각주 연결 단어 형광펜 (더 진하게) */
+/* 각주 연결 단어 — underline 하나로 통일 (dm-u가 담당) */
 .dm-hl {
-  background: rgba(152, 251, 152, 0.8);
   border-radius: 2px;
-  padding: 0 2px;
 }
 
 .dm-ref-caption--float {
