@@ -3794,6 +3794,36 @@ html, body {
   transform-origin: top left;
   pointer-events: none;
   user-select: none;
+  z-index: 0;
+}
+
+/* 인트로 타이틀 */
+.dm-intro-title {
+  font-family: var(--font-ahn);
+  font-size: clamp(40px, 5vw, 96px);
+  font-weight: 700;
+  color: #000;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin: 0 0 clamp(14px, 1.5vw, 28px) 0;
+  padding: 0;
+}
+
+/* 인트로 본문 오버라이드 (weight 700) */
+.dm-intro-body {
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
+/* 형광펜 하이라이트 (각주 색 #98FB98 고정) */
+.dm-hl {
+  background: rgba(152, 251, 152, 0.5);
+  border-radius: 2px;
+  padding: 0 2px;
 }
 
 .dm-ref-caption--float {
