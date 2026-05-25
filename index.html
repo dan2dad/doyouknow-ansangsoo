@@ -2395,10 +2395,19 @@
       rightD.style.opacity = p < 0.04 ? 0 : 1;
 
       if (ropeWrap) {
-        if (dmScroll.scrollTop > window.innerHeight * 0.3) {
-          ropeWrap.classList.add('fade-out');
-        } else {
+        var sections = dmScroll.querySelectorAll('.dm-section');
+        var scrollTop = dmScroll.scrollTop;
+        var currentIdx = 0;
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].offsetTop <= scrollTop + window.innerHeight * 0.5) {
+            currentIdx = i;
+          }
+        }
+        // 섹션 2 (0-base) = 3번 페이지에서만 표시, 나머지 숨김
+        if (currentIdx === 2) {
           ropeWrap.classList.remove('fade-out');
+        } else {
+          ropeWrap.classList.add('fade-out');
         }
       }
     }
