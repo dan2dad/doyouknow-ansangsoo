@@ -3792,7 +3792,7 @@ html, body {
   top: 29.4vh;
   transform: rotate(-15deg);
   transform-origin: top left;
-  pointer-events: none;
+  cursor: pointer;
   user-select: none;
   z-index: 0;
 }
@@ -3809,6 +3809,7 @@ html, body {
   position: relative;
   z-index: 1;
   margin: 0 0 clamp(14px, 1.5vw, 28px) 0;
+  transition: opacity 0.35s ease;
 }
 
 /* 인트로 본문 오버라이드 */
@@ -3816,6 +3817,14 @@ html, body {
   font-weight: 700;
   position: relative;
   z-index: 1;
+  transition: opacity 0.35s ease;
+}
+
+/* 이미지 클릭 시 텍스트 숨김 */
+.dm-section--intro.is-focused .dm-intro-title,
+.dm-section--intro.is-focused .dm-intro-body {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* 라인마다 따라붙는 형광펜 (box-decoration-break: clone) */
@@ -3824,8 +3833,8 @@ html, body {
   background: rgba(152, 251, 152, 0.55);
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-  padding: 0.12em 0.35em;
-  border-radius: 3px;
+  padding: 0.04em 0.25em;
+  border-radius: 2px;
 }
 
 /* 각주 연결 단어 형광펜 (더 진하게) */
